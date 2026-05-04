@@ -75,6 +75,8 @@ Az ágens és környezete által particionált tér (praktikusan) végtelen.
 
 Tetszőleges véges térrész információsűrűsége véges, de végtelen térrész – így az ágens környezete - állapottere (és így információtartalma) lehet végtelen, ugyanakkor lokálisan véges.
 
+Az információfeldolgozás sebessége véges, így az ágens kimenetének előállítása >0 idő alatt megy végbe a bemenet rendelkezésre állását követően.
+
 # Következtetések
 
 ## Fizikai kényszerek és korlátok
@@ -141,6 +143,43 @@ Ha a választott kimenetet beemeljük a trajektóriába, eredményként egy „h
 
 Az ágens annak eldöntéséhez, hogy milyen kimenetet választhat (pl. hogy az belefér-e a sávszélességbe), szüksége van a saját dinamikájának ismeretére, azaz állapotának részét kell képezze egy self-modell, melynek szintén lehorgonyzottnak kell lennie.
 
-#### Reflexív Self-modell meglétének kényszere
+#### Reflexív döntési self-modell meglétének kényszere
 
 A kétdimenziós célfüggvény arra a kérdésre ad választ, hogy adott ismeretek/történetiség mellett mennyi lesz a haszna egy adott kimenetnek, azaz valójában az ágens döntési funkciójának relfexív self-modellje, mely így szükségszerűen maga is a self-modell része.
+
+Vegyük észre, hogy ez valójában maga a döntési funkció, tehát a reflexív-döntési self-modell rekurzív; saját maga self-modellje.
+
+## A nagy mentális amortizációs ráta mellett túlélő ágensekre vonatkozó kényszerek
+
+Rögzített, magas mentális amortizációs ráta mellett a várható élettartam az alábbi alfejezetkben leírt képességek mértékével pozitívan korrelál.
+
+### Felügyeletlen tanulás/megfigyelés kényszere
+
+Az ágens világmodellje semelyik pillanatban nem lehet teljesen lehorgonyzott, tekintve, hogy az ágens állapottere véges, a modell által leírt környezeté viszont végtelen; az ágens self-modellje ezzel ellentétben elméletben lehetne teljesen lehorgonyzott a létrejötte pillanatában, ez az állapot azonban - mint lentebb látni fogjuk - nem tartható tartósan, és soha nem térhet vissza.
+
+Az ágens modelljei (a döntésben történő hasznosulás szempontjából) természetes módon amortizálódnak, ha a környezet vagy az ágens működése olyan fázisba vált (és onnan már nem vált vissza), amiben a modellek nem kalibráltak; az amortizálódás sebessége a mentális terheléssel arányos. A self-modell - elméletben lehetséges - tökéletes kalibráltsága pont ezért nem maradhat fent: az nem számolhat tökéletesen az ágens környezet által kiváltott állapotváltozásával, hiszen ahhoz a világmodell tökéletes kalibráltsága lenne szükséges.
+
+A kalibráció fenntartásának/javításának triviális eszköze az újonnan megfigyelt állapottrajektóriák "bedolgozása" a modellbe, vagyis a felügyeletlen tanulás; maximális pillanatnyi információsűrűség (vagyis a kapacitás teljes kihasználtsága) esetén ez csak a korábbi, már nem releváns trajektóriák reprezentációjának "felülírásával" történhet.
+
+A felügyeletlen tanulás valójában automatikus: a bemenet, mint egy információáramlás egy eseménye csak úgy létezhet, ha az ágens belső állapota megváltozik, azaz a tapasztaltak letárolódnak; éppen ezért a felügyeletlen tanulást nevezhetjük az interfész megfigyelésének is.
+
+### Megerősítés alapú tanulás
+
+A megerősítés alapú tanulás a kimenet célfüggvény szerinti várt és tényleges hasznának összevetésén alapul.
+
+Ez látszólag különbözik a felügyeletlen tanulástól, azonban a valóságban ez nem más, mint a reflexív döntési self-modell (azaz a döntési funkció reprezentációjának) felügyeletlen tanítása: az ágens saját tapasztalatából megtanulja, hogy a saját döntéseinek milyen haszna van, és ezt a tudást, mint paramétereket használja a döntési funkciójában.
+
+A döntési funkció kell nem feltétlenül fejleszthető legyen (az lehet "bedrótozott is"), de magas mentális amortizációs ráta mellett alapvető fontosságú.
+
+### Munkamemória fenntartásának kényszere
+
+A megerősítés alapú tanuláshoz elengedhetetlen, hogy az ágens:
+·  egy bemenettrajektóriához (ne csak egy kimenettrajektória + döntéshez) is ki tudja értékelni a célfüggvényt, meghatározva annak hasznát; ez tekinthető a döntési funkció részének
+·  egy bemenettrajektóriát egy korábbi döntéshez tudjon társítani, ehhez azonban a korábbi döntéseknek - legalább a visszacsatolásig - az ágens állapotának részét kell képeznie.
+
+Utóbbi okból kifolyólag a saját döntési funkcióját - megerősítés alapú tanulással - megváltoztatni képes ágensnek szükségszerűen része a korábbi döntés(ek) reprezentálására alkalmas munkamemória.
+
+### Predikciós kényszer
+
+A megerősítéses tanulás szükséges kényszere, hogy a célfunkció ne csak 1 - "túlélés" és 0 - "halál" értékkészletű legyen, ugyanis ebben az esetben a döntési funkció pontatlansága esetén - pont, ahol a tanulás releváns - az ágens csak a saját halálából "tanulna", ami egyéni túlélés szempontjából kontraproduktív.
+
