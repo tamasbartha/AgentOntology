@@ -199,11 +199,11 @@ A rekurzió egy, az ágensen belüli belső visszacsatolási hurkot feltételez;
 
 A predikcióhoz szintén szükséges a munkamemória, a szimulált állapotváltozások tárolásához.
 
-#### Az önmegfigyelés, a prediktivitás és a szimuláció alapú prediktivitás ekvivalenciája
+#### A prediktivitás és a szimuláció alapú prediktivitás ekvivalenciája
 
 A reaktív ágensek tekinthetők úgy, mint egy 0 rekurziós szintű célfüggvénnyel rendelkező, tisztán vitalitás alapú döntést preferáló ágensek; ezesetben azonban a vitalitásfüggvény binárisan is modellezhető, így kijelenthető, hogy a valós prediktivitás (így a proaktivitás) feltétele a szimuláció alapú prediktivitás, aminek előfeltétele a self-modell taníthatósága.
 
-Röviden: az önmegfigyelés, a prediktivitás és a szimuláció alapú prediktivtás (vagyis proaktivitás) ekvivalensek, ezért nevezzük az ilyen ágenseket egyszerűen csak prediktív/proaktív ágenseknek.
+Röviden: a prediktivitás és a szimuláció alapú prediktivtás (vagyis proaktivitás) ekvivalensek, ezért nevezzük az ilyen ágenseket egyszerűen csak prediktív/proaktív ágenseknek.
 
 
 
