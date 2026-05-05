@@ -1,7 +1,13 @@
-# AgentOntology
-Defines an ontology centered arount agens, and draws consequences from it, effectively resulting in a description of required state and functions for a viable agent.
+# Bevezetés
+Jelen dokumentum egy ágens ontológiát, és az abból következő, a túlélésben hatékony ágensekre vonatkozó követelményeket vázol fel.
 
-# Alapfogalmak
+Az eredeti cél egy célorientált IT projekt-menedzsment módszertan létrehozása volt, melynek követése - a kétkedők számára bebizonyítható módon - szükséges és elégséges egy információs cél megvalósulásához. Ennek létjogosultságát az indokolja, hogy a fellelhető módszertanok általában funkcionális leírások, melyek nem mutatják be a kényszereket, amik a funkciók mögött állnak, tehát nehezen bizonyítható az indokoltságuk.
+A módszertan kidolgozása során hamar világossá vált, hogy valójában tetszőleges célorientált irányítási módszertan alkalmas a feladat ellátására, és innen könnyen elvezetett az út egy (elosztott) ágens architektúra szükségességéhez.
+A jelenleg (általam) ismert ágens architektúrák szintén funkcionális leírások, melyek jól modellezik az ágensek működését, de nem adnak maradéktalan válaszokat a kényszerekre, melyek miatt adott funkciók szükségesek; ezért született ez az ontológia, mely a kényszerek felől közelíti meg az ideális architektúrát.
+
+Az eredeti cél nem teljesült, semmilyen architektúra nem született (még), de a kényszerek jelentős részben feltárásra kerültek, és számot tarthatnak az érdeklődésre.
+
+# Fogalmak
 
 ## Információáramlással kapcsolatos fogalmak
 
@@ -43,9 +49,11 @@ Defines an ontology centered arount agens, and draws consequences from it, effec
 
 **kimenet meglepősége** – a csomóponti maradék bizonytalanság differenciálja, információ ráta
 
-## Ágenciával kapcsolatos fogalmak
+## Ágens
 
 **ágens** - a tér egy összefüggő, véges része, melynek határolófelülete pontosan egy visszacsatolási hurok (az ágens-hurok) szűk keresztmetszetei közül a legkisebb felületű. A visszacsatolási hurok ágensen kívüli részét az ágens környezetének hívjuk; az ágens és környezete a hurok két kitüntetett csomópontja, a határolófelület pedig interfész.
+
+## Ágenssel kapcsolatos fogalmak
 
 **környezet pillanatnyi meglepettsége** – az ágens kimenetének meglepősége
 
@@ -114,8 +122,8 @@ Mivel a környezet statisztikailag – hacsak a sávszélesség nem 0 – minden
 ### Lehorgonyzott világmodell meglétének kényszere
 
 Egy ágens akkor tudja rendszerszerűen meglepni a környezetét, ha:
-·        az ágensnek rendszeresen szerencséje van, azaz véletlenszerűen képes mindig előállítani a megfelelő kimenet úgy, hogy az eredményül kapott kimeneti trajektória végül ne következzen a bemeneti trajektóriából
-·        az ágens állapota minden pillanatban korrelál (valamilyen mértékben) a bemeneti és kimeneti trajektóriákkal, vagyis a a világ (benne a környezet és saját maga) dinamikus modelljével; másszóval az **ágens** **rendelkezik világmodellel**; ez alapján pedig „tudhatja”, hogy mi az a kimenet, ami nem okoz meglepetést a környezetnek
+- az ágensnek rendszeresen szerencséje van, azaz véletlenszerűen képes mindig előállítani a megfelelő kimenet úgy, hogy az eredményül kapott kimeneti trajektória végül ne következzen a bemeneti trajektóriából
+- az ágens állapota minden pillanatban korrelál (valamilyen mértékben) a bemeneti és kimeneti trajektóriákkal, vagyis a a világ (benne a környezet és saját maga) dinamikus modelljével; másszóval az **ágens** **rendelkezik világmodellel**; ez alapján pedig „tudhatja”, hogy mi az a kimenet, ami nem okoz meglepetést a környezetnek
 
 A szerencsés ágens túléléséhez szükséges szerencse az élettapasztalattal exponenciálisan nő; rögzített tapasztalati intenzitás mellett ezért az ágens várható élettartama pozitívan korrelál a világmodellje lehorgonyzottságával.
 
@@ -141,11 +149,15 @@ Tekintve, hogy fentiek miatt az ágens állapota a bemeneti és kimeneti trajekt
 
 Ha a választott kimenetet beemeljük a kimeneti trajektóriába, valamint a bemeneti és kimeneti trajektóriákat összefésüljük, eredményként egy „hagyományos”, egyváltozós célfüggvényt kapunk, ami trajektóriacsonkhoz rendel hasznot; erre tekinthetünk úgy is, hogy az ágens trajektóriák között dönt, melyeknek az aktuális kimenetet leszámítva a múltja az ágens számára ismert (lehet).
 
-#### A világmodell, mint implicit döntési funkció
+### A világmodell inferenciája, mint döntési funkció
 
-Fentiek miatt a döntés dekomponálható a szóba jövő (a sávszélesség által korlátozott) kimenetek enumerálására, az egyes kimenetekhez a haszon kiszámítására és a legnagyobb hasznú kimenet kiválasztására.
+Fentiek miatt a döntés elméletben dekomponálható a szóba jövő (a sávszélesség által nem korlátozott) kimenetek enumerálására, az egyes kimenetekhez a haszon kiszámítására, és a legnagyobb hasznú kimenet kiválasztására.
 
-Ugyanakkor a világmodell önmagában tartalmaz minden ehhez szükséges információt: az aktuális trajektóriát követő lehetséges kimeneteket, illetve az azokat követő kimeneteket - azaz implicit módon azt, hogy akkor az ágens még "él"-e - így a döntés nem más, mint a világmodell inferenciája.
+Ugyanakkor a trajektóriákból álló világmodell önmagában tartalmaz minden ehhez szükséges információt, és annak inferenciájával kinyerhető a döntés; az inferencia több féle képpen megvalósítható, de alapja egy korábbi trajektória-rész autokorrelációja az aktuális trajektória-csonk végével. Ezt követően lehetséges a korreláló rész megfelelő (pl. leghosszabb, vagy legalább adott hosszúságú - tehát valahány lépésben nem halállal végződő) folytatásának, és ezáltal a közvetlenül következő kimenet kiválasztása.
+
+### A fizikai struktúra fenntartásának és fejlesztésének kényszere
+
+Az ágensnek megfelelő sávszélességgel - azaz fizikai struktúrával - kell rendelkeznie, ami lehetővé teszi a megfigyelést és az ágenciát, ugyanakkor megfelelően véd a fizikai behatások ellen. Ez valójában ellentmondás, mert a bemenetek és kimenetek könnyű állapotváltozást, azaz magas sávszélességet feltételeznek, míg a fizikai védekezés alacsonyat. Ez a gyakorlatban többféle alternatív stratégiával kezelhető (pl. interfész differenciálása, kimeneti és bemeneti sávszélesség differenciálása), de ezen stratégiák jelen dokumentum célja szempontjából nem relevánsak.
 
 ## A nagy mentális amortizációs ráta mellett túlélő ágensekre vonatkozó kényszerek
 
@@ -164,31 +176,71 @@ A bemenetek - mint események - érzékelése és a kimenetek - mint események 
 
 Amennyiben ez teljesül, tetszőleges bemenet érzékelése és tetszőleges kimenet kiváltása automatikusan tanulásnak is minősül, hiszen ezekkel a világmodell alapját képző trajektóriák bővülnek.
 
-###  A pillanatnyi kognitív terhelés reciproka, mint nembináris célfüggvény
+#### A pillanatnyi kognitív terhelés reciproka, mint a tanulást lehetővé tevő nembináris célfüggvény
 
 A bináris célfüggvénnyel az a probléma, hogy a döntési funkció pontatlansága esetén - pont, ahol a tanulás releváns - az ágens csak a saját halálából "tanulna", ami egyéni túlélés szempontjából kontraproduktív.
 
-Ehelyett az ágensnek olyan célfüggvényt kell alkalmaznia, ami arányos a várható hátralévő élettartamával, méghozzá értelemszerűen nem temporális, hanem kognitív áldozat tartományban mérve; ez pedig nem más, mint a pillanatnyi kognitív terhelés reciproka.
+Ehelyett az ágensnek olyan folytonos célfüggvényt kell alkalmaznia, ami ugyanúgy arányos a várható hátralévő élettartamával, méghozzá értelemszerűen nem temporális, hanem a kognitív áldozat tartományában mérve; ez pedig nem más, mint a pillanatnyi kognitív terhelés reciproka.
 
-####  1 lépéses világmodell inferencia, mind döntés
+###  Proaktivitás
 
-A világmodell inferenciája a bináris célfüggvényhez hasonló, azzal a különbséggel, hogy nem kell két lépést inferálni (a most választandó kimenetet, és az azt követő kimenetet), elég a közvetlenül következő kimeneteket-, és azok kognitív terhelésének reciprokát vizsgálni, melyhez a modell minden információt biztosít.
+Bár a modell alapú inferencia natívan alkalmas predikciókra (az autokorrelált múltbéli részlet kiterjesztésével), tanulás hiányában ez kívülről mindig egy huzalozott döntésnek, reaktív viselkedésnek tűnik.
 
-### Rekurzív szimuláció alapú prediktivitás
+Folytonos célfüggvénnyel, és tanulással azonban ez valódi proaktivitássá minősül, ráadásul ha a célfüggvény a kognitív terhelés reciproka, a hosszú távú haszon rendkívül egyszerűen - az aktuális trajektória-csonk és a kiterjesztett trajektória-rész összeillesztésével kapott trajektória-csonk végének kognitív terhelésével - számolható.
 
-A célfüggvény fent leírt természetes rekurziójának szabadjára engedésével a számolás során egy szimulációt kapunk: meghatározzuk, hogy adott cselekvésláncolatot - valamint a self és a környezet várható reagálása esetén - követően mennyi lesz a vitalitása az ágensnek.
+##### Szimuláció
 
-A folyamat nem más, mit a self-modell tanításához használt belső visszacsatolási hurok gerjesztettségi állapotaként.
+Az autokorreláció miatt eleve rekurzív, tehát belső visszacsatolási kör alapú interferencia kiegészíthető a meghosszabbított, projektált trajektória csonk további - rekurzív - inferenciájával, tehát hosszú távú szimulációval, ahol a belső visszacsatolási kör gerjesztésének csillapítását - tehát a szimuláció konvergenciáját - temporális (standard, vagy élettapasztalat alapú) diszkontálás biztosíthatja; mindez azonban fentiek miatt nem szükséges feltétele a proaktivitásnak.
 
-A rekurzió egy, az ágensen belüli belső visszacsatolási hurkot feltételez; ennek gerjesztésének csillapítása - és a szimuláció konvergenciája - időbeli diszkontálással biztosítható; a rekurziók engedélyezett száma tekinthető a tervezési horizontnak; a vitalitásfüggvény a célfüggvény nem rekurzív komponense.
+##### Exploráció
 
-A predikcióhoz szintén szükséges a munkamemória, a szimulált állapotváltozások tárolásához.
+A fentiek miatt a múlt kisebb "darabkáiból" összerakott jövőre alapozó szimuláció - a pontatlansága miatt - explorációnak is tűnhet, és nem teljesen kalibrált világmodell bővítésének - jobb híján - alapvető eszköze.
 
-#### A proaktivitás és a szimuláció alapú prediktivitás ekvivalenciája
+### A mentális- és fizikai állapot szétválasztásának kényszere
 
-A reaktív ágensek tekinthetők úgy, mint egy 0 rekurziós szintű célfüggvénnyel, tehát 0 tervezési horizonttal rendelkező, tisztán vitalitás alapú döntést preferáló ágensek; ezesetben azonban a vitalitásfüggvény binárisan is modellezhető, így kijelenthető, hogy proaktivitás feltétele a rekurzív szimuláció alapú prediktivitás, aminek előfeltétele a self-modell taníthatósága.
+Magas mentális amortizációs ráta mellett a fennmaradás alapvető feltétele a gyors tanulás, ami többek között gyors állapotváltozást és nagy információsűrűséget igényel, míg a fizikai behatásoknak ellenálló fizikai struktúra pont az ellenkezőjét.
 
-Fentiek miatt a proaktivitás és a rekurzív szimuláció alapú prediktivitás ekvivalensek, ezért nevezzük az erre képes ágenseket egyszerűen csak proaktív ágenseknek.
+Ebből következik, hogy magas mentális amortizációs ráta mellett a túlélés feltétele a mentális és a fizikai állapot szétválasztása; ennek pedig következménye a visszacsatolási hurok (legalább) 8-assá formálódása: egy külső visszacsatolási hurok (az interakciós kör) a környezet és a fizikai állapot-, valamint egy belső - a fizikai állapoton keresztül az előzővel összekötött - visszacsatolási hurok (a kognitív kör) a fizikai állapot és a mentális állapot között.
+
+## Optimalizáció és heurisztikák
+
+Az ágens korlátos állapottere (azaz információtároló kapacitás) és számítási kapacitása a nagyobb hatékonyság érdekében különböző "trükköket" követel meg az ágens működésére vonatkozóan.
+
+Ezen optimalizációs technikák alapvetően az alábbi három jelenségre alapoznak:
+- dekompozíció
+- priorizálás
+- elimináció
+- materializálás
+
+Ezekből már levezethetők bonyolultabb optimalizációs technikák, pl.:
+- absztrakció/veszteséges tömörítés (dekompozíció és priorizálás relevancia szerint, majd a kevésbé releváns komponensek eliminációja), ezzel számítási kapacitás és tárolókapacitás egyaránt megspórolható, értelemszerűen a kalibráltság csökkenése mellett
+- veszteségmentes tömörítés (dekompozíció redundancia szerint, majd redundáns részletek eliminációja), ezzel tárolókapacitás nyerhető számítási kapacitás kárára)
+
+Ezekre alapozva pedig képezhetők az ágensekre specifikusan jellemző optimalizációs technikák, pl.:
+- szemantizálás (a "napló" absztrakciója és materializálása, lehetőve téve a gyorsabb - de kevésbé pontos - inferenciát; egyben szükségessé téve a szemantikus- és epizodikus memória szétválasztását)
+- felejtés (a szemantikus- és epizodikus memória kevéssé releváns részeinek törlése, helyet nyitva az új emlékeknek)
+- a predikció materializálása (azaz a hasznosság tárolása a trajektóriákhoz és az új tapasztalatokból származó, megváltozott hasznosság visszapropagálását az oda vezető múltbeli trajektóriákra; ezáltal lehetővé téve az inferencia során az 1 mélységű, mégis prediktív előretekintést)
+- hierarchikus absztrakció ("Level Of Detail"; lehetővé teszi a modell több szintű absztrahálását, ezáltal az iteratív, de idő hiányában bármikor - egy adott pontosság mellett - leállítható számításokat)
+- modularitás és párhuzamosítás (beleértve a cél dekompozíciót, arbitrálást, szinkronizációt/kommunikációt/állatmegosztást)
+- dinamikus mintavételezés
+
+A technikák felsorolása nem teljes körű.
+
+# Érdekes következmények
+
+A fentiek következményei az alábbi, a jelenleg (legalább részlegesen) elterjedt konszenzussal szembenő állítások validitása:
+- nincsenek "tanult" reflexek, csak a gyakorlás (és a fenti technikák) miatt gyorsabb/nagyobb hosszú/jobb autokorreláció
+- nincs mintakövetés, mint optimalizációs technika; ehelyett minden mintakövetés
+- nincs megerősítéses tanulás, csak tanulás (bár előbbihez közell áll a haszon materializálása és visszapropagálása, ez azonban inkább optimalizációs technika, mint önálló funkció)
+- nincs külön self-modell és környezet-modell, csak világmodell
+- az ágens nem a saját meglepetését minimalizálja, hanem a környezetét maximalizálja; előbbi csak melléktermék; ez feloldja a Dark Room paradoxont is
+
+# Továbfejlesztési  irányok
+
+Fenti ontológia és dedukció - annak érdekében, hogy teljes legyen - kiterjesztendő további optimalizációs technikákkal, az azokra kényszerekkel és alkalmazásuk feltételeivel; valamint az elosztott/hiearchikus ágensek viselkedésére, együttműködésére és kommunikációjára (mentális állapotuk megosztására) vonatkozó kényszerekkel.
+
+Ezt követően levezethető egy ágens (és ágens-hierarchia) "referencia architektúrája", mely már használható tetszőleges ágens (pl. MI, egy vállalat, biológiai, stb.) konstruktív vizsgálatára; ennek az az alapja, hogy az egyszerű túlélésre (vagy a faj túlélésére) optimalizált célfüggvény transzformálható, egy túlélésben jó ágens-architektúra másban is hatékony lesz (az instrumentális konvegencia elismerése mellett természetesen, ez azonban egy kellően hosszú - pl. egy állapotcél eléréséig tartó - trajektóriákhoz hasznot rendelő célfüggvény formájában eleve előáll).
+
 
 
 
