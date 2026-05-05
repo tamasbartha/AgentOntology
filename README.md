@@ -115,11 +115,15 @@ Mivel a környezet statisztikailag – hacsak a sávszélesség nem 0 – minden
 
 Egy ágens akkor tudja rendszerszerűen meglepni a környezetét, ha:
 ·        az ágensnek rendszeresen szerencséje van, azaz véletlenszerűen képes mindig előállítani a megfelelő kimenet úgy, hogy az eredményül kapott kimeneti trajektória végül ne következzen a bemeneti trajektóriából
-·        az ágens állapota minden pillanatban korrelál (valamilyen mértékben) a bemeneti trajektóriával, vagyis a környezet általa érzékelhető dinamikus modelljével; másszóval az **ágens** **rendelkezik világmodellel**; ez alapján pedig „tudhatja”, hogy mi az a kimenet, ami nem okoz meglepetést a környezetnek
+·        az ágens állapota minden pillanatban korrelál (valamilyen mértékben) a bemeneti és kimeneti trajektóriákkal, vagyis a a világ (benne a környezet és saját maga) dinamikus modelljével; másszóval az **ágens** **rendelkezik világmodellel**; ez alapján pedig „tudhatja”, hogy mi az a kimenet, ami nem okoz meglepetést a környezetnek
 
 A szerencsés ágens túléléséhez szükséges szerencse az élettapasztalattal exponenciálisan nő; rögzített tapasztalati intenzitás mellett ezért az ágens várható élettartama pozitívan korrelál a világmodellje lehorgonyzottságával.
 
 Extrém esetben a lehorgonyzottság 0, vagyis az ágensnek nincs világmodellje, ebből az is következik, hogy **egy minimális lehorgonyzottság az ágens létrejöttének szükséges feltétele**.
+
+#### Bemenet meglepőségének csökkenése, mint mellékhatás
+
+A bemenet meglepősége a világmodell lehorgonyzottságával értelemszerűen automatikusan csökken, de ez csak mellékhatás; nem azért él túl az ágens, mert csökkenti a saját meglepettségét, hanem azért, mert növeli a kimenet meglepőségét; az utóbbi pedig az előbbit is magával hozza, a környezet ugyanis elkezd egyre inkább az ágens által rákényszerített pályán mozogni.
 
 ### Döntéskényszer
 
@@ -127,27 +131,21 @@ Az ágensnek, amennyiben több – a sávszélesség és az ágenciakényszer á
 
 #### Célorientáltság kényszere
 
-A döntés valójában az ágens saját állapotának és a bemenetek függvényében determinisztikus, tekintve, hogy nincs egyéb információ, ami azt befolyásolja.
+A döntés valójában az ágens világmodelljének és a bemenetek függvényében determinisztikus, tekintve, hogy nincs egyéb információ, ami azt befolyásolja.
 
 Fentiek miatt utólag megfigyelve az egyes, aktuálisan lehetséges kimenetekhez az ágens aktuális állapota és az aktuális bemenetek függvényében egy – a túlélés szempontjából értelmezett – determinisztikus hasznosság rendelhető úgy, hogy a modell mindig a legnagyobb hasznú kimenet mellett dönt; szélsőséges (ellenben mindig megvalósítható) esetben úgy, hogy a ténylegesen választott kimenethez 1, más minden más kimenethez pedig egységesen 0 hasznosság kerül hozzárendelésre.
 
-Tekintve, hogy fentiek miatt az ágens állapota a bemenettrajektóriákkal, és így a világ állapottrajektóriájával – pontosabban annak jelenig tartó csokjával – korrelálnak, felírható egy olyan kétdimenziós célfüggvény, ami egy adott állapottrajektória-csonkhoz és kimenethez hasznot rendel.
+Tekintve, hogy fentiek miatt az ágens állapota a bemeneti és kimeneti trajektóriákkal korrelál, felírható egy olyan háromváltozós célfüggvény, ami egy adott bemeneti és kimeneti állapottrajektória-csonkhoz, valamint egy kimenethez hasznot rendel.
 
-##### Leképezhetőség „tradicionális” célfüggvényre
+##### Leképzés „tradicionális” célfüggvényre
 
-Ha a választott kimenetet beemeljük a trajektóriába, eredményként egy „hagyományos”, egydimenziós célfüggvényt kapunk, ami trajektóriához rendel hasznot.
+Ha a választott kimenetet beemeljük a kimeneti trajektóriába, valamint a bemeneti és kimeneti trajektóriákat összefésüljük, eredményként egy „hagyományos”, egyváltozós célfüggvényt kapunk, ami trajektóriacsonkhoz rendel hasznot; erre tekinthetünk úgy is, hogy az ágens trajektóriák között dönt, melyeknek az aktuális kimenetet leszámítva a múltja az ágens számára ismert (lehet).
 
-#### A döntés dekomponálhatósága
+#### A világmodell, mint implicit döntési funkció
 
-Fentiek miatt a döntés dekomponálható a szóba jöhető (a sávszélesség által korlátozott) kimenetek enumerálására, az egyes kimenetekhez a haszon kiszámítására és a legnagyobb hasznú kimenet kiválasztására.
+Fentiek miatt a döntés dekomponálható a szóba jövő (a sávszélesség által korlátozott) kimenetek enumerálására, az egyes kimenetekhez a haszon kiszámítására és a legnagyobb hasznú kimenet kiválasztására.
 
-### Self-modell meglétének kényszere
-
-Az ágens állapotának fentiek maitt szükségszerűen részét kell képeznie egy, a saját dinamikáját leíró self-modell-nek, ami meghatározza, hogy adott ismeretek/történetiség mellett:
-· a képességfüggvénynek, vagyis hogy az ágens milyen képességekkel rendelkezik, azaz milyen kimenetet választhat (pl. hogy az belefér-e a sávszélességbe)
-· a célfüggvénynek, vagyis hogy mennyi lesz a haszna egy adott kimenetnek; egyszerűsített esetben ez nem más, minthogy az ágens túléli-e az adott kimenet hatását vagy sem
-
-Vegyük észre, hogy a célfüggvény valójában rekurzív: meghatározza a döntés hasznát úgy, hogy a döntési funkciónak maga is része; emiatt a self-modell ezt leíró része valójában - részben - saját maga self-modellje.
+Ugyanakkor a világmodell önmagában tartalmaz minden ehhez szükséges információt: az aktuális trajektóriát követő lehetséges kimeneteket, illetve az azokat követő kimeneteket - azaz implicit módon azt, hogy akkor az ágens még "él"-e - így a döntés nem más, mint a világmodell inferenciája.
 
 ## A nagy mentális amortizációs ráta mellett túlélő ágensekre vonatkozó kényszerek
 
@@ -155,43 +153,28 @@ Rögzített, magas mentális amortizációs ráta mellett a várható élettarta
 
 ### Tanulás kényszere
 
-Az ágens világmodellje semelyik pillanatban nem lehet teljesen lehorgonyzott, tekintve, hogy az ágens állapottere véges, a modell által leírt környezeté viszont végtelen; az ágens self-modellje ezzel ellentétben elméletben lehetne teljesen lehorgonyzott a létrejötte pillanatában, ez az állapot azonban - mint lentebb látni fogjuk - nem tartható tartósan, és soha nem térhet vissza.
+Az ágens világmodellje semelyik pillanatban nem lehet teljesen lehorgonyzott, tekintve, hogy az ágens állapottere véges, a modell által (többek között) leírt környezeté viszont végtelen.
 
-Az ágens modelljei (a döntésben történő hasznosulás szempontjából) természetes módon amortizálódnak, ha a környezet vagy az ágens működése olyan fázisba vált (és onnan már nem vált vissza), amiben a modellek nem kalibráltak; az amortizálódás sebessége a mentális terheléssel arányos. A self-modell - elméletben lehetséges - tökéletes kalibráltsága pont ezért nem maradhat fent: az nem számolhat tökéletesen az ágens környezet által kiváltott állapotváltozásával, hiszen ahhoz a világmodell tökéletes kalibráltsága lenne szükséges.
+A világmodell (értéke) természetes módon amortizálódik, ha a környezet vagy az ágens működése olyan fázisba vált (és onnan már nem vált vissza), amiben a modell nem kalibrált; az amortizálódás sebessége értelemszerűen a mentális terheléssel arányos.
 
-A kalibráció fenntartásának/javítása a tanulás, mely tehát kiterjed a világ- és self-modellre egyaránt.
+A kalibráció fenntartása/javítása a tanulás, mely a világmodell - vagyis a bemeneti és kimeneti trajektóriák - bővítését jelenti.
 
-#### Felügyeletlen tanulás/megfigyelés
+#### Naplózás, mint tanulás
+A bemenetek - mint események - érzékelése és a kimenetek - mint események - kiváltása az ágens állapotának legalább ideiglenes megváltozásával jár, azonban ahhoz, hogy a világmodell változzon, a változásnak értelemszerűen permanensnek-, és a kauzalitás (leginkább idő-) sorrendjében rendezettnek-, azaz "naplószerűnek" kell lennie.
 
-A tanulás triviális eszköze az újonnan megfigyelt állapottrajektóriák "bedolgozása" a modellbe, vagyis a felügyeletlen tanulás; maximális pillanatnyi információsűrűség (vagyis a kapacitás teljes kihasználtsága) esetén ez csak a korábbi, már nem releváns trajektóriák reprezentációjának "felülírásával" történhet.
+Amennyiben ez teljesül, tetszőleges bemenet érzékelése és tetszőleges kimenet kiváltása automatikusan tanulásnak is minősül, hiszen ezekkel a világmodell alapját képző trajektóriák bővülnek.
 
-A felügyeletlen tanulás valójában automatikus: a bemenet, mint egy információáramlás egy eseménye csak úgy létezhet, ha az ágens belső állapota megváltozik, azaz a tapasztaltak letárolódnak; éppen ezért a felügyeletlen tanulást nevezhetjük az interfész megfigyelésének, vagy egyszerűen csak **megfigyelésnek** is.
+###  A pillanatnyi kognitív terhelés reciproka, mint nembináris célfüggvény
 
-#### Megerősítés alapú tanulás/önmegfigyelés
+A bináris célfüggvénnyel az a probléma, hogy a döntési funkció pontatlansága esetén - pont, ahol a tanulás releváns - az ágens csak a saját halálából "tanulna", ami egyéni túlélés szempontjából kontraproduktív.
 
-A megerősítés alapú tanulás látszólag különbözik a felügyeletlen tanulástól, azonban a valóságban ez nem más, mint a self-modell felügyeletlen tanítása: az ágens saját tapasztalataiból megtanulja, hogy mire képes és hogy a döntéseinek milyen haszna van.
+Ehelyett az ágensnek olyan célfüggvényt kell alkalmaznia, ami arányos a várható hátralévő élettartamával, méghozzá értelemszerűen nem temporális, hanem kognitív áldozat tartományban mérve; ez pedig nem más, mint a pillanatnyi kognitív terhelés reciproka.
 
-A megerősítés alapú tanulás tehát valójában az ágens saját kimeneteinek és azoknak a vitalitásra (lásd lentebb) vonatkozó *reflexív* hatásának megfigyelését jelenti; ezen belül kiemelt jelentősége van a reflexív kimenetek figyelésének, ugyanis az ágens belső állapotának - és így a self-modell dinamikai "kezdőállapotának" - meghatározásához a bemenettrajektória mellett erre is szükség van.
+####  1 lépéses világmodell inferencia, mind döntés
 
-##### Munkamemória fenntartásának kényszere
+A világmodell inferenciája a bináris célfüggvényhez hasonló, azzal a különbséggel, hogy nem kell két lépést inferálni (a most választandó kimenetet, és az azt követő kimenetet), elég a közvetlenül következő kimeneteket-, és azok kognitív terhelésének reciprokát vizsgálni, melyhez a modell minden információt biztosít.
 
-Az önmegfigyeléshez feltétlenül szükséges a saját kiinduló állapot ideiglenes tárolása, hiszen az szükséges a megváltozott állapot dinamikájának meghatározásához; az önmegfigyelő ágens állapotának éppen ezért szükségszerűen részét képzi a munkamemória.
-
-### Prediktivitás és proaktivitás kényszere
-
-Vegyük észre, hogy célfüggvény alapján számolt haszon - még bináris esetben is - predikció, azt határozza meg, hogy az ágens várhatóan túl fog-e élni, vagy sem.
-
-#### Vitalitás alapú célfunkció kényszere
-
-A megerősítéses tanulás szükséges kényszere, hogy a célfunkció ne csak 1 - "túlélés" és 0 - "halál" értékkészletű legyen, ugyanis ebben az esetben a döntési funkció pontatlansága esetén - pont, ahol a tanulás releváns - az ágens csak a saját halálából "tanulna", ami egyéni túlélés szempontjából kontraproduktív.
-
-Ez szükségszerűen egy folytonos értékkészletű célfüggvényhez vezet, mely egy bemenettrajektóriához - vagyis lényegében egy világ- és self-modellhez - egy score-t rendel, ami meghatározza, hogy mennyire kedvező az ágens helyzete a túlélés szempontjából, vagyis mekkora a vitalitása.
-
-##### Ágencia, mint vitalitásmérő
-
-A vitalitás, vagyis a túlélés valószínűsége triviálisan lehet az ágencia mértéke, vagyis az ágens képességfüggvényének valamilyen súlyozott átlaga, melyet az ágens eleve megfigyel.
-
-#### Rekurzív szimuláció alapú prediktivitás
+### Rekurzív szimuláció alapú prediktivitás
 
 A célfüggvény fent leírt természetes rekurziójának szabadjára engedésével a számolás során egy szimulációt kapunk: meghatározzuk, hogy adott cselekvésláncolatot - valamint a self és a környezet várható reagálása esetén - követően mennyi lesz a vitalitása az ágensnek.
 
