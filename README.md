@@ -171,15 +171,11 @@ A felügyeletlen tanulás valójában automatikus: a bemenet, mint egy informác
 
 A megerősítés alapú tanulás látszólag különbözik a felügyeletlen tanulástól, azonban a valóságban ez nem más, mint a self-modell felügyeletlen tanítása: az ágens saját tapasztalataiból megtanulja, hogy mire képes és hogy a döntéseinek milyen haszna van.
 
-A megerősítés alapú tanulás tehát valójában az ágens saját kimeneteinek és azok hatásának megfigyelését jelenti; ezen belül kiemelt jelentősége van a reflexív kimenetek figyelésének, ugyanis az ágens belső állapotának - és így a self-modell dinamikai "kezdőállapotának" - meghatározásához a bemenettrajektória mellett erre is szükség van.
+A megerősítés alapú tanulás tehát valójában az ágens saját kimeneteinek és azoknak a vitalitásra (lásd lentebb) vonatkozó *reflexív* hatásának megfigyelését jelenti; ezen belül kiemelt jelentősége van a reflexív kimenetek figyelésének, ugyanis az ágens belső állapotának - és így a self-modell dinamikai "kezdőállapotának" - meghatározásához a bemenettrajektória mellett erre is szükség van.
 
-#### Munkamemória fenntartásának kényszere
+##### Munkamemória fenntartásának kényszere
 
 Az önmegfigyeléshez feltétlenül szükséges a saját kiinduló állapot ideiglenes tárolása, hiszen az szükséges a megváltozott állapot dinamikájának meghatározásához; az önmegfigyelő ágens állapotának éppen ezért szükségszerűen részét képzi a munkamemória.
-
-#### EZ MÉG NEM JÓ - Hiba minimalizálás
-
-A tanítása egy belső visszacsatolási hurkot feltételez, melynek csillapítása a tárolt dinamika és a megfigyelt dinamika közti különbség reciprokával arányos; tehát az ágens lényegében a terv/tény összehasonlítás különbségéből "tanul", azt csatolja vissza a self-modell-be. A munkamemória felfogható a self-modell tanításához használt belső visszacsatolási hurok gerjesztettségi állapotaként is.
 
 ### Prediktivitás és proaktivitás kényszere
 
@@ -201,7 +197,7 @@ A célfüggvény fent leírt természetes rekurziójának szabadjára engedésé
 
 A folyamat nem más, mit a self-modell tanításához használt belső visszacsatolási hurok gerjesztettségi állapotaként.
 
-A rekurzió egy, az ágensen belüli belső visszacsatolási hurkot feltételez (melynek a self-modell tanítása miatt eleve léteznie kell); ennek gerjesztésének csillapítása - és a szimuláció konvergenciája - időbeli diszkontálással biztosítható; a rekurziók engedélyezett száma tekinthető a tervezési horizontnak; a vitalitásfüggvény a célfüggvény nem rekurzív komponense.
+A rekurzió egy, az ágensen belüli belső visszacsatolási hurkot feltételez; ennek gerjesztésének csillapítása - és a szimuláció konvergenciája - időbeli diszkontálással biztosítható; a rekurziók engedélyezett száma tekinthető a tervezési horizontnak; a vitalitásfüggvény a célfüggvény nem rekurzív komponense.
 
 A predikcióhoz szintén szükséges a munkamemória, a szimulált állapotváltozások tárolásához.
 
