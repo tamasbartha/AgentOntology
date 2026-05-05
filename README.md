@@ -188,11 +188,23 @@ Ez szükségszerűen egy folytonos értékkészletű célfüggvényhez vezet, me
 Vegyük észre, hogy a vitalitás alapú célfüggvény alapján történő döntés valójában predikció, a vitalitás ugyanis azt határozza meg, hogy mennyire valószínű a jövőben az ágens túlélése.
 
 #### Ágencia, mint vitalitásmérő
+
 A vitalitás, vagyis a túlélés valószínűsége triviálisan lehet az ágencia mértéke, vagyis az ágens képességfüggvényének valamilyen súlyozott átlaga.
 
 #### Szimuláció alapú prediktivitás
+
 A célfüggvény fent leírt természetes rekurziójának szabadjára engedésével a számolás során egy szimulációt kapunk: meghatározzuk, hogy adott cselekvésláncolatot - valamint a self és a környezet várható reagálása esetén - követően mennyi lesz a vitalitása az ágensnek.
 
-Látható, hogy a szimuláció alapú prediktivitás szükségszerű velejárója a self-modell tanítási képességének.
+A rekurzió egy, az ágensen belüli belső visszacsatolási hurkot feltételez; ennek gerjesztésének csillapítása - és a szimuláció konvergenciája - időbeli diszkontálással biztosítható; a rekurziók engedélyezett száma tekinthető a tervezési horizontnak; a vitalitásfüggvény a célfüggvény nem rekurzív komponense.
+
+A predikcióhoz szintén szükséges a munkamemória, a szimulált állapotváltozások tárolásához.
+
+#### Az önmegfigyelés, a prediktivitás és a szimuláció alapú prediktivitás ekvivalenciája
+
+A reaktív ágensek tekinthetők úgy, mint egy 0 rekurziós szintű célfüggvénnyel rendelkező, tisztán vitalitás alapú döntést preferáló ágensek; ezesetben azonban a vitalitásfüggvény binárisan is modellezhető, így kijelenthető, hogy a valós prediktivitás (így a proaktivitás) feltétele a szimuláció alapú prediktivitás, aminek előfeltétele a self-modell taníthatósága.
+
+Röviden: az önmegfigyelés, a prediktivitás és a szimuláció alapú prediktivtás (vagyis proaktivitás) ekvivalensek, ezért nevezzük az ilyen ágenseket egyszerűen csak prediktív/proaktív ágenseknek.
+
+
 
 
