@@ -1,6 +1,8 @@
 # Agent Ontology: A Constraint-Based Approach
 This document outlines an agent ontology and the subsequent requirements for agents efficient in survival.
 
+A key innovation of this ontology and deduction is the inversion of the core postulate of Karl Friston’s Free Energy Principle (FEP). While the FEP suggests that agents act to minimize the surprise (variational free energy) received from their environment [Friston, 2010], this framework proposes the opposite: the primary driver of an agent is the maximization of the surprise exerted upon the environment. In this model, the minimization of internal surprise is merely a necessary byproduct of successful environmental perturbation—a shift that effectively resolves the 'Dark Room' paradox.
+
 ## Introduction
 The original objective was to create a goal-oriented IT project management methodology, the adherence to which—provable even to skeptics—is necessary and sufficient for the realization of an information goal. The rationale for this was that available methodologies are generally functional descriptions that fail to present the underlying constraints; thus, their necessity is difficult to prove.
 
@@ -160,3 +162,8 @@ Agents use several techniques to handle limited capacity:
 To be complete, this ontology and deduction must be extended with further optimization techniques, their constraints, and application conditions. Furthermore, it should include constraints regarding the behavior, cooperation, and communication (sharing of mental states) of distributed/hierarchical agents.
 
 Subsequently, a "Reference Architecture" for an agent (and agent hierarchy) can be derived. This can then be used for the constructive examination of any agent (e.g., AI, a corporation, biological entities). Based on the principle of instrumental convergence, an agent architecture optimized for survival will be efficient in achieving other state-goals as well.
+
+## References
+
+Friston, K. (2010). The free-energy principle: a unified brain theory? Nature Reviews Neuroscience, 11(2), 127-138. doi.org
+Friston, K., Thornton, C., & Clark, A. (2012). Free-energy minimization and the dark-room problem. Frontiers in Psychology, 3, 130. doi.org
