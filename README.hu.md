@@ -243,6 +243,10 @@ Fenti ontológia és dedukció - annak érdekében, hogy teljes legyen - kiterje
 
 Ezt követően levezethető egy ágens (és ágens-hierarchia) "referencia architektúrája", mely már használható tetszőleges ágens (pl. MI, egy vállalat, biológiai, stb.) konstruktív vizsgálatára; ennek az az alapja, hogy az egyszerű túlélésre (vagy a faj túlélésére) optimalizált célfüggvény transzformálható, egy túlélésben jó ágens-architektúra másban is hatékony lesz (az instrumentális konvegencia elismerése mellett természetesen, ez azonban egy kellően hosszú - pl. egy állapotcél eléréséig tartó - trajektóriákhoz hasznot rendelő célfüggvény formájában eleve előáll).
 
+## Referenciák
+
+Friston, K. (2010). The free-energy principle: a unified brain theory? Nature Reviews Neuroscience, 11(2), 127-138. doi.org
+Friston, K., Thornton, C., & Clark, A. (2012). Free-energy minimization and the dark-room problem. Frontiers in Psychology, 3, 130. doi.org
 
 
 
