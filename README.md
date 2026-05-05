@@ -173,37 +173,43 @@ A megerősítés alapú tanulás látszólag különbözik a felügyeletlen tanu
 
 A megerősítés alapú tanulás tehát valójában az ágens saját kimeneteinek és azok hatásának megfigyelését jelenti; ezen belül kiemelt jelentősége van a reflexív kimenetek figyelésének, ugyanis az ágens belső állapotának - és így a self-modell dinamikai "kezdőállapotának" - meghatározásához a bemenettrajektória mellett erre is szükség van.
 
-### Munkamemória fenntartásának kényszere
+#### Munkamemória fenntartásának kényszere
 
 Az önmegfigyeléshez feltétlenül szükséges a saját kiinduló állapot ideiglenes tárolása, hiszen az szükséges a megváltozott állapot dinamikájának meghatározásához; az önmegfigyelő ágens állapotának éppen ezért szükségszerűen részét képzi a munkamemória.
 
-### Vitalitás alapú célfunkció kényszere
+#### EZ MÉG NEM JÓ - Hiba minimalizálás
+
+A tanítása egy belső visszacsatolási hurkot feltételez, melynek csillapítása a tárolt dinamika és a megfigyelt dinamika közti különbség reciprokával arányos; tehát az ágens lényegében a terv/tény összehasonlítás különbségéből "tanul", azt csatolja vissza a self-modell-be. A munkamemória felfogható a self-modell tanításához használt belső visszacsatolási hurok gerjesztettségi állapotaként is.
+
+### Prediktivitás és proaktivitás kényszere
+
+Vegyük észre, hogy célfüggvény alapján számolt haszon - még bináris esetben is - predikció, azt határozza meg, hogy az ágens várhatóan túl fog-e élni, vagy sem.
+
+#### Vitalitás alapú célfunkció kényszere
 
 A megerősítéses tanulás szükséges kényszere, hogy a célfunkció ne csak 1 - "túlélés" és 0 - "halál" értékkészletű legyen, ugyanis ebben az esetben a döntési funkció pontatlansága esetén - pont, ahol a tanulás releváns - az ágens csak a saját halálából "tanulna", ami egyéni túlélés szempontjából kontraproduktív.
 
 Ez szükségszerűen egy folytonos értékkészletű célfüggvényhez vezet, mely egy bemenettrajektóriához - vagyis lényegében egy világ- és self-modellhez - egy score-t rendel, ami meghatározza, hogy mennyire kedvező az ágens helyzete a túlélés szempontjából, vagyis mekkora a vitalitása.
 
-### Prediktivitás
+##### Ágencia, mint vitalitásmérő
 
-Vegyük észre, hogy a vitalitás alapú célfüggvény alapján történő döntés valójában predikció, a vitalitás ugyanis azt határozza meg, hogy mennyire valószínű a jövőben az ágens túlélése.
+A vitalitás, vagyis a túlélés valószínűsége triviálisan lehet az ágencia mértéke, vagyis az ágens képességfüggvényének valamilyen súlyozott átlaga, melyet az ágens eleve megfigyel.
 
-#### Ágencia, mint vitalitásmérő
-
-A vitalitás, vagyis a túlélés valószínűsége triviálisan lehet az ágencia mértéke, vagyis az ágens képességfüggvényének valamilyen súlyozott átlaga.
-
-#### Szimuláció alapú prediktivitás
+#### Rekurzív szimuláció alapú prediktivitás
 
 A célfüggvény fent leírt természetes rekurziójának szabadjára engedésével a számolás során egy szimulációt kapunk: meghatározzuk, hogy adott cselekvésláncolatot - valamint a self és a környezet várható reagálása esetén - követően mennyi lesz a vitalitása az ágensnek.
 
-A rekurzió egy, az ágensen belüli belső visszacsatolási hurkot feltételez; ennek gerjesztésének csillapítása - és a szimuláció konvergenciája - időbeli diszkontálással biztosítható; a rekurziók engedélyezett száma tekinthető a tervezési horizontnak; a vitalitásfüggvény a célfüggvény nem rekurzív komponense.
+A folyamat nem más, mit a self-modell tanításához használt belső visszacsatolási hurok gerjesztettségi állapotaként.
+
+A rekurzió egy, az ágensen belüli belső visszacsatolási hurkot feltételez (melynek a self-modell tanítása miatt eleve léteznie kell); ennek gerjesztésének csillapítása - és a szimuláció konvergenciája - időbeli diszkontálással biztosítható; a rekurziók engedélyezett száma tekinthető a tervezési horizontnak; a vitalitásfüggvény a célfüggvény nem rekurzív komponense.
 
 A predikcióhoz szintén szükséges a munkamemória, a szimulált állapotváltozások tárolásához.
 
-#### A prediktivitás és a szimuláció alapú prediktivitás ekvivalenciája
+#### A proaktivitás és a szimuláció alapú prediktivitás ekvivalenciája
 
-A reaktív ágensek tekinthetők úgy, mint egy 0 rekurziós szintű célfüggvénnyel rendelkező, tisztán vitalitás alapú döntést preferáló ágensek; ezesetben azonban a vitalitásfüggvény binárisan is modellezhető, így kijelenthető, hogy a valós prediktivitás (így a proaktivitás) feltétele a szimuláció alapú prediktivitás, aminek előfeltétele a self-modell taníthatósága.
+A reaktív ágensek tekinthetők úgy, mint egy 0 rekurziós szintű célfüggvénnyel, tehát 0 tervezési horizonttal rendelkező, tisztán vitalitás alapú döntést preferáló ágensek; ezesetben azonban a vitalitásfüggvény binárisan is modellezhető, így kijelenthető, hogy proaktivitás feltétele a rekurzív szimuláció alapú prediktivitás, aminek előfeltétele a self-modell taníthatósága.
 
-Röviden: a prediktivitás és a szimuláció alapú prediktivtás (vagyis proaktivitás) ekvivalensek, ezért nevezzük az ilyen ágenseket egyszerűen csak prediktív/proaktív ágenseknek.
+Fentiek miatt a proaktivitás és a rekurzív szimuláció alapú prediktivitás ekvivalensek, ezért nevezzük az erre képes ágenseket egyszerűen csak proaktív ágenseknek.
 
 
 
