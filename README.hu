@@ -1,7 +1,7 @@
 # Bevezetés
 Jelen dokumentum egy ágens ontológiát, és az abból következő, a túlélésben hatékony ágensekre vonatkozó követelményeket vázol fel.
 
-Koncepciójában nagy mértékben hasonlít 
+Az ontológia és dedukció legnagyobb újítása (egyebek mellett), hogy míg Karl Friston Szabadenergia Elve (FEP) azt posztulálja, hogy az ágensek a környezetből érkező meglepetést (variációs szabadenergiát) minimalizálják [Friston, 2010], addig a jelen ontológia ezt megfordítja. Az én tézisem szerint az ágensek elsődleges hajtóereje a környezetre gyakorolt hatás (okozott meglepetés) maximalizálása, aminek a belső meglepetés csökkenése csupán szükségszerű mellékterméke; ezzel effektíve feloldva a "Dark Room" paradoxont.
 
 Az eredeti cél egy célorientált IT projekt-menedzsment módszertan létrehozása volt, melynek követése - a kétkedők számára bebizonyítható módon - szükséges és elégséges egy információs cél megvalósulásához. Ennek létjogosultságát az indokolja, hogy a fellelhető módszertanok általában funkcionális leírások, melyek nem mutatják be a kényszereket, amik a funkciók mögött állnak, tehát nehezen bizonyítható az indokoltságuk.
 A módszertan kidolgozása során hamar világossá vált, hogy valójában tetszőleges célorientált irányítási módszertan alkalmas a feladat ellátására, és innen könnyen elvezetett az út egy (elosztott) ágens architektúra szükségességéhez.
