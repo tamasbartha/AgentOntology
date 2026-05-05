@@ -1,247 +1,162 @@
-# Bevezetés
-Jelen dokumentum egy ágens ontológiát, és az abból következő, a túlélésben hatékony ágensekre vonatkozó követelményeket vázol fel.
+# Agent Ontology: A Constraint-Based Approach
+This document outlines an agent ontology and the subsequent requirements for agents efficient in survival.
 
-Az eredeti cél egy célorientált IT projekt-menedzsment módszertan létrehozása volt, melynek követése - a kétkedők számára bebizonyítható módon - szükséges és elégséges egy információs cél megvalósulásához. Ennek létjogosultságát az indokolja, hogy a fellelhető módszertanok általában funkcionális leírások, melyek nem mutatják be a kényszereket, amik a funkciók mögött állnak, tehát nehezen bizonyítható az indokoltságuk.
-A módszertan kidolgozása során hamar világossá vált, hogy valójában tetszőleges célorientált irányítási módszertan alkalmas a feladat ellátására, és innen könnyen elvezetett az út egy (elosztott) ágens architektúra szükségességéhez.
-A jelenleg (általam) ismert ágens architektúrák szintén funkcionális leírások, melyek jól modellezik az ágensek működését, de nem adnak maradéktalan válaszokat a kényszerekre, melyek miatt adott funkciók szükségesek; ezért született ez az ontológia, mely a kényszerek felől közelíti meg az ideális architektúrát.
+## Introduction
+The original objective was to create a goal-oriented IT project management methodology, the adherence to which—provable even to skeptics—is necessary and sufficient for the realization of an information goal. The rationale for this was that available methodologies are generally functional descriptions that fail to present the underlying constraints; thus, their necessity is difficult to prove.
 
-Az eredeti cél nem teljesült, semmilyen architektúra nem született (még), de a kényszerek jelentős részben feltárásra kerültek, és számot tarthatnak az érdeklődésre.
+During the development of the methodology, it soon became clear that any goal-oriented management methodology is essentially suitable for the task, which led directly to the necessity of a (distributed) agent architecture. 
+Currently known agent architectures are also functional descriptions: they model how agents operate but do not provide exhaustive answers to the constraints that make certain functions necessary. This ontology was born to approach the ideal architecture from the perspective of constraints.
 
-# Fogalmak
+While the original goal of a complete architecture has not yet been realized, a significant portion of the constraints has been identified and may be of interest to the community.
 
-## Információáramlással kapcsolatos fogalmak
+## Definitions
 
-**állapottrajektória** - időhöz állapotot rendelő függvény; diszkrét esetben állapotok időbeli sorozata; az állapot időbeli változását reprezentálja, tehát egy kezdőállapot és változások sorozataként/függvényeként is értelmezhető
+### Concepts Related to Information Flow
 
-**információ ráta** - egy függvény, ami egy állapottrajektória adott pontjára (egy időpontra) meghatározza, hogy adott időpontban milyen gyorsan termelődik új információ, azaz mennyire tér el az állapotváltozás a korábbiakban megszokott mintázattól; nem más, mint az adott időpontig bezárólag értelmezett trajektória-csonk Shannon entrópiájának a differenciálja
+**State Trajectory** – A function mapping time to state; in the discrete case, a temporal sequence of states. It represents the change of state over time and can be interpreted as a starting state plus a sequence of changes/functions.
 
-**lokális regularitás** – az információ ráta differenciálhatósági rendje (azaz annak meghatározása, hogy a függvény hányadik differenciálja szinguláris, azaz szakad) egy adott (idő)pontban; ha az információ ráta egy adott időpontban szinguláris, akkor annak lokális regularitása 0; ha sima – tehát semelyik rendű differenciálja sem szakad -, akkor végtelen
+**Information Rate** – A function that determines how quickly new information is generated at a given point of a state trajectory. It is the differential of the Shannon entropy of the trajectory segment defined up to that point.
 
-**esemény** – az az időpont (és a hozzá tartozó állapotváltozás), amikor a lokális regularitás nem végtelen
+**Local Regularity** – The differentiability order of the information rate at a given point in time. If the information rate is singular (discontinuous), the local regularity is 0. If it is smooth (no derivative is discontinuous), it is infinite.
 
-**esemény regularitása** – a lokális regularitás az esemény bekövetkezésének pillanatában; definíciószerűen nem végtelen
+**Event** – A point in time (and the associated state change) where local regularity is not infinite.
 
-**kaotikus esemény** – olyan esemény, aminek regularitása 0
+**Event Regularity** – The local regularity at the moment an event occurs; by definition, not infinite.
 
-**eseménytrajektória/folyamat** - időhöz eseményeket rendelő diszkrét függvény, azaz események időbeli sorozata; egy kezdőállapotból kiindulva rekonstruálható segítségével egy állapottrajektória
+**Chaotic Event** – An event with a regularity of 0.
 
-**globális regularitás** – a lokális regularitás reciprokának integráljának reciproka; azt határozza meg, hogy a teljes trajektória átlagosan milyen regularitással rendelkezett; ha a trajektóriában volt kaotikus esemény, akkor a trajektória regularitása is 0, tehát kaotikus. Mivel egy trajektória veszteségmentesen reprezentálható a különböző rendű differenciálok megváltozásának szuperpozíciójaként is, a globális regularitás tekinthető a trajektória reprezentációjának tömöríthetőségeként is; mivél magasabb szintű differenciálokkal reprezentálható a trajektória, annál kevesebb helyre van szükség a reprezentálásához.
+**Event Trajectory / Process** – A discrete function mapping time to events; a temporal sequence of events. A state trajectory can be reconstructed from a starting state using an event trajectory.
 
-**információáramlás** - olyan folyamat, ami kauzálisan rendezett, azaz minden eseményre igaz, hogy annak bekövetkezésének szükséges, de nem feltétlenül elégséges előfeltétele az előző esemény bekövetkezése
+**Global Regularity** – The reciprocal of the integral of the reciprocal of local regularity. It defines the average regularity of the entire trajectory. If a trajectory contains a chaotic event, its global regularity is 0. Since a trajectory can be losslessly represented as a superposition of changes in different orders of derivatives, global regularity can be viewed as the compressibility of the trajectory representation.
 
-**csatorna** - az információáramlás tere/útja; az a fizikai vagy logikai közeg (a tér egy része), melynek állapotváltozásai alkotják egy információáramlás eseményeit; egy csatorna maga is csatornákra dekomponálható a terének particionálásával
+**Information Flow** – A process that is causally ordered, meaning for every event, the occurrence of the preceding event is a necessary (but not necessarily sufficient) precondition.
 
-**interfész** – csatornát particionáló sík; maga is értelmezhető állapotmentes csatornaként, az állapotváltozása a két oldalán zajló állapotváltozások differenciája; a két oldalának „limesze”
+**Channel** – The space/path of information flow; the physical or logical medium (a part of space) whose state changes constitute the events of an information flow. A channel can be decomposed into sub-channels by partitioning its space.
 
-**információáramlási sebesség** – egy interfész állapotváltozásai által definiált trajektória információ rátája
+**Interface** – A plane partitioning a channel; it can be interpreted as a stateless channel where the state change is the difference between the state changes on its two sides.
 
-**sávszélesség** – egy interfész által elhatárolt térrészek külső (pl. fizikai kényszerek) szülte maximális információáramlási sebessége; időben változhat, de nem az interfész állapotának része (hiszen az állapotmentes), hanem származtatott tulajdonság
+**Information Flow Velocity** – The information rate of the trajectory defined by the state changes of an interface.
 
-**szűk keresztmetszet** – az az interfész, ami adott csatorna vonatkozásában a legkisebb sávszélességgel bír; egyben a csatorna sávszélessége
+**Bandwidth** – The maximum information flow velocity of the spaces delimited by an interface, dictated by external (e.g., physical) constraints. It may change over time but is not part of the interface's state, rather a derived property.
 
-**csatorna topológia** - a különböző, térben potenciálisan átfedő csatornák rendszere
+**Bottleneck** – The interface with the smallest bandwidth regarding a given channel; also the bandwidth of the channel itself.
 
-**csomópont** – a csatornák térbeli átfedésének helye; egy csomópontban egy eseménynek nem csak egy szükséges, hanem minden elégséges feltételeként bekövetkező esemény bekövetkezik.
+**Channel Topology** – The system of various, potentially overlapping channels in space.
 
-**visszacsatolási hurok -** olyan önmagába záródó csatorna, melynek minden pontja csomópontként funkcionál (azaz az információáramlás önmagát fenntartó kauzális láncot alkot), és amelynek tetszőleges ponton vett vágása egy kétirányú interfészt eredményez.kimenet – az a csomóponti felület, ahol az állapotváltozásnak
+**Node** – The location where channels overlap in space; at a node, an event occurs not just as a necessary condition, but as a consequence of all sufficient conditions being met.
 
-**csomóponti kimenet maradék bizonytalansága -** egy adott csomópontra jellemző információs entrópia-többlet, amely a csomópontból kiinduló (kimeneti) eseménytrajektória azon információtartalmát reprezentálja, amely a csomópontba érkező (bemeneti) eseménytrajektóriából kauzális úton nem származtatható; a kimenet trajektória bemenő trajektória függvényében számolt Shannon-entrópiája
+**Feedback Loop** – A self-closing channel where every point functions as a node (i.e., the information flow forms a self-sustaining causal chain), and any cut at an arbitrary point results in a two-way interface.
 
-**kimenet meglepősége** – a csomóponti maradék bizonytalanság differenciálja, információ ráta
+**Residual Uncertainty of Node Output** – The additional informational entropy characteristic of a node, representing the information content of the outgoing (output) event trajectory that cannot be causally derived from the incoming (input) event trajectory.
 
-## Ágens
+**Output Surprisal** – The differential of the node's residual uncertainty; the information rate.
 
-**ágens** - a tér egy összefüggő, véges része, melynek határolófelülete pontosan egy visszacsatolási hurok (az ágens-hurok) szűk keresztmetszetei közül a legkisebb felületű. A visszacsatolási hurok ágensen kívüli részét az ágens környezetének hívjuk; az ágens és környezete a hurok két kitüntetett csomópontja, a határolófelület pedig interfész.
+### Agent
 
-## Ágenssel kapcsolatos fogalmak
+**Agent** – A contiguous, finite part of space whose boundary surface is exactly the smallest area among the bottlenecks of a feedback loop (the agent-loop). The part of the feedback loop outside the agent is called the agent's environment. The agent and its environment are two distinguished nodes of the loop, and the boundary surface is the interface.
 
-**környezet pillanatnyi meglepettsége** – az ágens kimenetének meglepősége
+### Concepts Related to the Agent
 
-**ágens pillanatnyi meglepettsége** – a környezet kimenetének, vagyis az ágens bemenetének meglepősége
+**Instantaneous Surprisal of the Environment** – The surprisal of the agent's output.
 
-**élettapasztalat** –a bemenet információ rátájának integrálja az ágens teljes élettartamára; azt határozza meg, hogy az ágens mennyi új információval találkozott élete során
+**Instantaneous Surprisal of the Agent** – The surprisal of the environment's output (i.e., the agent's input).
 
-**tapasztalati intenzitás** – az élettapasztalat élettartamra vetített átlaga
+**Life Experience** – The integral of the input information rate over the agent's entire lifespan; it determines the total amount of new information the agent has encountered.
 
-**pillanatnyi kognitív terhelés** – a bemenet információ rátájának és lokális regularitásának hányadosa; minél nagyobb, az ágens annál inkább olyan eseménnyel szembesül éppen, amihez még csak „hasonlót” sem látott
+**Experience Intensity** – Life experience averaged over the lifespan.
 
-**kognitív áldozat** – a pillanatnyi kognitív terhelés integrálja; az ágens élettapasztalatának és annak globális regularitásának hányadosa
+**Instantaneous Cognitive Load** – The ratio of the input information rate to its local regularity. The higher it is, the more the agent is facing an event unlike anything seen before.
 
-**mentális amortizációs ráta** – a kognitív áldozat élettartamra vetített átlaga
+**Cognitive Sacrifice** – The integral of the instantaneous cognitive load; the ratio of the agent's life experience to its global regularity.
 
-**ágencia** – az ágens azon tendenciája, hogy meglepi a környezetét
+**Mental Amortization Rate** – Cognitive sacrifice averaged over the lifespan.
 
-**lehorgonyzottság** – dinamikus modell (pl. világmodell) és a funkció (pl. a világ működése) közti korreláció
+**Agency** – The agent's tendency to surprise its environment.
 
-# Feltételezések
+**Groundedness** – The correlation between a dynamic model (e.g., world model) and the function (e.g., the workings of the world).
 
-Az információáramlás energiaáramlással jár, még ha nem is feltétlenül egyező az irányban.
+## Assumptions
 
-Energiaáramlás nem következhet be sem végtelenül rövid idő alatt, sem végtelen teljesítménnyel (sem ezek együtt).
+*   Information flow involves energy flow, even if not necessarily in the same direction.
+*   Energy flow cannot occur in zero time, nor with infinite power.
+*   The space partitioned by the agent and its environment is (practically) infinite.
+*   The information density of any finite space is finite, but the state space of an infinite space (the environment) can be infinite, while remaining locally finite.
+*   Information processing speed is finite; thus, generating the agent's output takes $>0$ time following the availability of the input.
 
-Az ágens és környezete által particionált tér (praktikusan) végtelen.
+## Deductions
 
-Tetszőleges véges térrész információsűrűsége véges, de végtelen térrész – így az ágens környezete - állapottere (és így információtartalma) lehet végtelen, ugyanakkor lokálisan véges.
+### Physical Constraints and Limits
 
-Az információfeldolgozás sebessége véges, így az ágens kimenetének előállítása >0 idő alatt megy végbe a bemenet rendelkezésre állását követően.
+**The Finiteness of Bandwidth**
+Bandwidth is finite on any physical channel and any cut, including an agent's interface, as the opposite would assume infinite power energy flow. Consequently, a perfectly chaotic event cannot occur in a physical system; however, quasi-chaotic events may exist that exceed the agent's physical limits, thus appearing chaotic from the agent's perspective.
 
-# Következtetések
+**The Determinism of Bandwidth**
+The bandwidth of the interface changes deterministically based solely on the mutual effects of the agent's output and the environment's input on each other's state.
 
-## Fizikai kényszerek és korlátok
+**Constraints on the Agent and Environment**
+Neither the agent nor its environment can be omnipotent or omnicognizant, given their finite volume and information density; however, the environment is by definition potentially omnicognizant due to its infinite volume.
 
-### A sávszélesség korlátossága
+**The Necessity of Termination**
+An existing agent cannot maintain the surprisal of its environment indefinitely. Since its state space is finite, the environment will eventually "learn" the agent, causing the feedback loop to cease. The agent's survival is possible only because the environment's local cognitive capacities are finite, and the involvement of the global environment takes time due to the finite speed of information flow.
 
-A sávszélesség tetszőleges fizikai csatornán és tetszőleges vágásán, így egy ágens interfészén is véges, tekintve, hogy ennek ellentéte végtelen teljesítményű energiaáramlást feltételezne; következésképpen fizikai rendszer állapotában tökéletesen kaotikus esemény nem következhet be; ugyanakkor létezhet olyan kvázi-kaotikus esemény, ami az ágens fizikai korlátain (lásd lentebb) túlmutat, ezért az ágens szempontjából kaotikusnak tekinthető.
+### Absolute Constraints on a Surviving Agent
 
-### A sávszélesség determinizmusa
+**The Constraint of Agency**
+The existence of the agent's boundary surface and the feedback loop are equivalent. The maintenance of the feedback loop—and thus the agent—requires continuous mutual surprisal. Since the environment (having infinite state space) will statistically always surprise the agent, the agent's survival depends primarily on its own Agency: maintaining bandwidth $>0$ and the ability to surprise the environment.
 
-Az interfész (az elhatárolt térrészek fizikai tulajdonságaiból származtatott) sávszélessége kizárólag az ágens kimenete és a környezet bemenetének egymás állapotára gyakorolt hatására, determinisztikusan változik.
+**The Constraint of a Grounded World Model**
+An agent can systematically surprise its environment if:
+1.  It is consistently lucky (statistically improbable over time).
+2.  The agent possesses a **World Model** (its state correlates with the input and output trajectories).
 
-### Az ágens és környezete korlátai
+The expected lifespan of an agent correlates positively with the groundedness of its world model. A minimum level of groundedness is a necessary condition for the emergence of an agent.
 
-Fentiek miatt sem az ágens, sem környezete nem lehet omnipotens, illetve az ágens nem lehet omnikogens, tekintve, hogy térfogata és információsűrűsége véges; ugyanakkor a környezet definíciószerűen potenciálisan omnikogens (hiszen térfogata végtelen).
+**The Necessity of Decision**
+If multiple outputs are possible within bandwidth and agency constraints, the agent must decide.
 
-### A megszűnés kényszere
+**The Constraint of Goal-Orientedness**
+Decision-making is deterministic based on the world model and inputs. From an external observer's perspective, a deterministic utility can be assigned to possible outputs. Thus, a goal function can be derived that assigns utility to trajectory segments.
 
-Egy létező ágens nem tudja végtelen ideig fenntartani a környezet meglepését, tekintve, hogy – mivel állapottere véges – a környezet előbb-utóbb “kiismeri”, ezáltal a visszacsatolási hurok megszűnik.
+### The Inference of the World Model as a Decision Function
+Decision-making can be decomposed into enumerating possible outputs, calculating utility, and selecting the maximum. The world model itself contains this information; its inference is based on the autocorrelation of past trajectory segments with the current trajectory.
 
-Azért lehetséges egyáltalán az ágens fennmaradása – fentiek miatt statisztikailag véges ideig -, mert a környezetnek az ágens megismerést biztosító képességei lokálisan végesek (hiszen a “lokális” környezet egy véges térrész), és a globális környezet bevonódása a folyamatba időt igényel, tekintve, hogy az információáramlás sebessége korlátos.
+### Constraint to Maintain and Develop Physical Structure
+The agent must possess a physical structure (bandwidth) that allows for observation and agency while protecting against physical impacts. This creates a trade-off between sensitivity (high bandwidth) and protection (low bandwidth).
 
-## A túlélő ágensre vonatkozó abszolút kényszerek
+## Constraints on Agents Surviving High Mental Amortization Rates
 
-Az ágensek létezése nem feltétlenül kényszer, de a létező ágensekre (fentiek miatt kényszerű) megszűnésükkor visszatekintve az alábbiakban leírt kényszereknek igaznak kell találtatniuk.
+**The Constraint of Learning**
+The world model is never perfectly grounded due to the finite state space of the agent versus the infinite environment. Calibration is maintained through learning (expanding the world model trajectories).
 
-### Az ágencia kényszere
+**Logging as Learning**
+For the world model to change, state changes must be permanent and ordered (log-like). Thus, sensing and acting automatically constitute learning.
 
-Az ágens határolófelületének- és a visszacsatolási hurok létezése fentiek miatt ekvivalensek: nem létező visszacsatolási huroknak nincs vágása, létezőnek viszont mindig van az ágens definíciónak megfelelő vágása.
+**Proactivity**
+With a continuous goal function and learning, reactive behavior becomes true proactivity. Long-term utility can be calculated by projecting the current trajectory segment.
 
-Információnak a környezet felől nézve definíció szerint a környezet pillanatnyi meglepettsége, vagyis az ágens által szolgáltatott meglepetés; míg az ágens felől nézve az ágens pillanatnyi meglepettsége, vagyis a környezet által szolgáltatott meglepetés minősül; emiatt a visszacsatolási hurok fennmaradása – vagyis az ágens fennmaradása - egymás folyamatos meglepetését jelenti.
+**Separation of Mental and Physical State**
+High mental amortization requires fast learning (high information density/rapid state change), while physical protection requires the opposite. This necessitates the separation of mental and physical states, forming a **"Figure-8" feedback loop**:
+1.  An **External Loop (Interaction)** between the environment and the physical state.
+2.  An **Internal Loop (Cognitive)** between the physical state and the mental state.
 
-Mivel a környezet statisztikailag – hacsak a sávszélesség nem 0 – mindenképpen okoz meglepetést az ágensnek (a tekintve, hogy az ágens állapota által hordozott információ véges, a környezeté pedig praktikusan végtelen), az ágens fennmaradásának feltétele elsősorban a saját ágenciája, tehát a sávszélesség >0 fennmaradása és a környezet meglepetésének képessége.
+## Optimization and Heuristics
+Agents use several techniques to handle limited capacity:
+*   **Decomposition, Prioritization, Elimination, Materialization.**
+*   **Abstraction (Lossy compression):** Sacrificing calibration for capacity.
+*   **Semantization:** Abstracting the "log" into semantic memory for faster inference; this necessitates the separation of semantic and episodic memory.
+*   **Forgetting:** Deleting less relevant parts of memory.
+*   **Materialization of Predictions:** Storing utility values within trajectories to allow 1-step predictive lookahead.
+*   **Hierarchical Abstraction (Level Of Detail):** Allowing iterative computation that can be halted at any point based on time constraints.
+*   **Modularity and Parallelization:** Including goal decomposition, arbitration, and synchronization.
 
-### Lehorgonyzott világmodell meglétének kényszere
+## Interesting Consequences
+*   There are no "learned reflexes," only faster autocorrelation due to optimization.
+*   There is no "pattern following" as an optimization; rather, everything is pattern following.
+*   There is no reinforcement learning, only learning (utility propagation is an optimization, not a separate function).
+*   There is no separate self-model and environment-model, only a **World Model**.
+*   The agent does not minimize its own surprisal; it maximizes the surprisal of the environment. (This resolves the Dark Room Paradox).
 
-Egy ágens akkor tudja rendszerszerűen meglepni a környezetét, ha:
-- az ágensnek rendszeresen szerencséje van, azaz véletlenszerűen képes mindig előállítani a megfelelő kimenet úgy, hogy az eredményül kapott kimeneti trajektória végül ne következzen a bemeneti trajektóriából
-- az ágens állapota minden pillanatban korrelál (valamilyen mértékben) a bemeneti és kimeneti trajektóriákkal, vagyis a a világ (benne a környezet és saját maga) dinamikus modelljével; másszóval az **ágens** **rendelkezik világmodellel**; ez alapján pedig „tudhatja”, hogy mi az a kimenet, ami nem okoz meglepetést a környezetnek
+## Future Directions
+To be complete, this ontology and deduction must be extended with further optimization techniques, their constraints, and application conditions. Furthermore, it should include constraints regarding the behavior, cooperation, and communication (sharing of mental states) of distributed/hierarchical agents.
 
-A szerencsés ágens túléléséhez szükséges szerencse az élettapasztalattal exponenciálisan nő; rögzített tapasztalati intenzitás mellett ezért az ágens várható élettartama pozitívan korrelál a világmodellje lehorgonyzottságával.
-
-Extrém esetben a lehorgonyzottság 0, vagyis az ágensnek nincs világmodellje, ebből az is következik, hogy **egy minimális lehorgonyzottság az ágens létrejöttének szükséges feltétele**.
-
-#### Bemenet meglepőségének csökkenése, mint mellékhatás
-
-A bemenet meglepősége a világmodell lehorgonyzottságával értelemszerűen automatikusan csökken, de ez csak mellékhatás; nem azért él túl az ágens, mert csökkenti a saját meglepettségét, hanem azért, mert növeli a kimenet meglepőségét; az utóbbi pedig az előbbit is magával hozza, a környezet ugyanis elkezd egyre inkább az ágens által rákényszerített pályán mozogni.
-
-### Döntéskényszer
-
-Az ágensnek, amennyiben több – a sávszélesség és az ágenciakényszer által nem korlátozott – kimenete is lehetséges, döntenie kell, hogy melyik kimenetet választja.
-
-#### Célorientáltság kényszere
-
-A döntés valójában az ágens világmodelljének és a bemenetek függvényében determinisztikus, tekintve, hogy nincs egyéb információ, ami azt befolyásolja.
-
-Fentiek miatt utólag megfigyelve az egyes, aktuálisan lehetséges kimenetekhez az ágens aktuális állapota és az aktuális bemenetek függvényében egy – a túlélés szempontjából értelmezett – determinisztikus hasznosság rendelhető úgy, hogy a modell mindig a legnagyobb hasznú kimenet mellett dönt; szélsőséges (ellenben mindig megvalósítható) esetben úgy, hogy a ténylegesen választott kimenethez 1, más minden más kimenethez pedig egységesen 0 hasznosság kerül hozzárendelésre.
-
-Tekintve, hogy fentiek miatt az ágens állapota a bemeneti és kimeneti trajektóriákkal korrelál, felírható egy olyan háromváltozós célfüggvény, ami egy adott bemeneti és kimeneti állapottrajektória-csonkhoz, valamint egy kimenethez hasznot rendel.
-
-##### Leképzés „tradicionális” célfüggvényre
-
-Ha a választott kimenetet beemeljük a kimeneti trajektóriába, valamint a bemeneti és kimeneti trajektóriákat összefésüljük, eredményként egy „hagyományos”, egyváltozós célfüggvényt kapunk, ami trajektóriacsonkhoz rendel hasznot; erre tekinthetünk úgy is, hogy az ágens trajektóriák között dönt, melyeknek az aktuális kimenetet leszámítva a múltja az ágens számára ismert (lehet).
-
-### A világmodell inferenciája, mint döntési funkció
-
-Fentiek miatt a döntés elméletben dekomponálható a szóba jövő (a sávszélesség által nem korlátozott) kimenetek enumerálására, az egyes kimenetekhez a haszon kiszámítására, és a legnagyobb hasznú kimenet kiválasztására.
-
-Ugyanakkor a trajektóriákból álló világmodell önmagában tartalmaz minden ehhez szükséges információt, és annak inferenciájával kinyerhető a döntés; az inferencia több féle képpen megvalósítható, de alapja egy korábbi trajektória-rész autokorrelációja az aktuális trajektória-csonk végével. Ezt követően lehetséges a korreláló rész megfelelő (pl. leghosszabb, vagy legalább adott hosszúságú - tehát valahány lépésben nem halállal végződő) folytatásának, és ezáltal a közvetlenül következő kimenet kiválasztása.
-
-### A fizikai struktúra fenntartásának és fejlesztésének kényszere
-
-Az ágensnek megfelelő sávszélességgel - azaz fizikai struktúrával - kell rendelkeznie, ami lehetővé teszi a megfigyelést és az ágenciát, ugyanakkor megfelelően véd a fizikai behatások ellen. Ez valójában ellentmondás, mert a bemenetek és kimenetek könnyű állapotváltozást, azaz magas sávszélességet feltételeznek, míg a fizikai védekezés alacsonyat. Ez a gyakorlatban többféle alternatív stratégiával kezelhető (pl. interfész differenciálása, kimeneti és bemeneti sávszélesség differenciálása), de ezen stratégiák jelen dokumentum célja szempontjából nem relevánsak.
-
-## A nagy mentális amortizációs ráta mellett túlélő ágensekre vonatkozó kényszerek
-
-Rögzített, magas mentális amortizációs ráta mellett a várható élettartam az alábbi alfejezetkben leírt képességek mértékével pozitívan korrelál.
-
-### Tanulás kényszere
-
-Az ágens világmodellje semelyik pillanatban nem lehet teljesen lehorgonyzott, tekintve, hogy az ágens állapottere véges, a modell által (többek között) leírt környezeté viszont végtelen.
-
-A világmodell (értéke) természetes módon amortizálódik, ha a környezet vagy az ágens működése olyan fázisba vált (és onnan már nem vált vissza), amiben a modell nem kalibrált; az amortizálódás sebessége értelemszerűen a mentális terheléssel arányos.
-
-A kalibráció fenntartása/javítása a tanulás, mely a világmodell - vagyis a bemeneti és kimeneti trajektóriák - bővítését jelenti.
-
-#### Naplózás, mint tanulás
-A bemenetek - mint események - érzékelése és a kimenetek - mint események - kiváltása az ágens állapotának legalább ideiglenes megváltozásával jár, azonban ahhoz, hogy a világmodell változzon, a változásnak értelemszerűen permanensnek-, és a kauzalitás (leginkább idő-) sorrendjében rendezettnek-, azaz "naplószerűnek" kell lennie.
-
-Amennyiben ez teljesül, tetszőleges bemenet érzékelése és tetszőleges kimenet kiváltása automatikusan tanulásnak is minősül, hiszen ezekkel a világmodell alapját képző trajektóriák bővülnek.
-
-#### A pillanatnyi kognitív terhelés reciproka, mint a tanulást lehetővé tevő nembináris célfüggvény
-
-A bináris célfüggvénnyel az a probléma, hogy a döntési funkció pontatlansága esetén - pont, ahol a tanulás releváns - az ágens csak a saját halálából "tanulna", ami egyéni túlélés szempontjából kontraproduktív.
-
-Ehelyett az ágensnek olyan folytonos célfüggvényt kell alkalmaznia, ami ugyanúgy arányos a várható hátralévő élettartamával, méghozzá értelemszerűen nem temporális, hanem a kognitív áldozat tartományában mérve; ez pedig nem más, mint a pillanatnyi kognitív terhelés reciproka.
-
-###  Proaktivitás
-
-Bár a modell alapú inferencia natívan alkalmas predikciókra (az autokorrelált múltbéli részlet kiterjesztésével), tanulás hiányában ez kívülről mindig egy huzalozott döntésnek, reaktív viselkedésnek tűnik.
-
-Folytonos célfüggvénnyel, és tanulással azonban ez valódi proaktivitássá minősül, ráadásul ha a célfüggvény a kognitív terhelés reciproka, a hosszú távú haszon rendkívül egyszerűen - az aktuális trajektória-csonk és a kiterjesztett trajektória-rész összeillesztésével kapott trajektória-csonk végének kognitív terhelésével - számolható.
-
-##### Szimuláció
-
-Az autokorreláció miatt eleve rekurzív, tehát belső visszacsatolási kör alapú interferencia kiegészíthető a meghosszabbított, projektált trajektória csonk további - rekurzív - inferenciájával, tehát hosszú távú szimulációval, ahol a belső visszacsatolási kör gerjesztésének csillapítását - tehát a szimuláció konvergenciáját - temporális (standard, vagy élettapasztalat alapú) diszkontálás biztosíthatja; mindez azonban fentiek miatt nem szükséges feltétele a proaktivitásnak.
-
-##### Exploráció
-
-A fentiek miatt a múlt kisebb "darabkáiból" összerakott jövőre alapozó szimuláció - a pontatlansága miatt - explorációnak is tűnhet, és nem teljesen kalibrált világmodell bővítésének - jobb híján - alapvető eszköze.
-
-### A mentális- és fizikai állapot szétválasztásának kényszere
-
-Magas mentális amortizációs ráta mellett a fennmaradás alapvető feltétele a gyors tanulás, ami többek között gyors állapotváltozást és nagy információsűrűséget igényel, míg a fizikai behatásoknak ellenálló fizikai struktúra pont az ellenkezőjét.
-
-Ebből következik, hogy magas mentális amortizációs ráta mellett a túlélés feltétele a mentális és a fizikai állapot szétválasztása; ennek pedig következménye a visszacsatolási hurok (legalább) 8-assá formálódása: egy külső visszacsatolási hurok (az interakciós kör) a környezet és a fizikai állapot-, valamint egy belső - a fizikai állapoton keresztül az előzővel összekötött - visszacsatolási hurok (a kognitív kör) a fizikai állapot és a mentális állapot között.
-
-## Optimalizáció és heurisztikák
-
-Az ágens korlátos állapottere (azaz információtároló kapacitás) és számítási kapacitása a nagyobb hatékonyság érdekében különböző "trükköket" követel meg az ágens működésére vonatkozóan.
-
-Ezen optimalizációs technikák alapvetően az alábbi három jelenségre alapoznak:
-- dekompozíció
-- priorizálás
-- elimináció
-- materializálás
-
-Ezekből már levezethetők bonyolultabb optimalizációs technikák, pl.:
-- absztrakció/veszteséges tömörítés (dekompozíció és priorizálás relevancia szerint, majd a kevésbé releváns komponensek eliminációja), ezzel számítási kapacitás és tárolókapacitás egyaránt megspórolható, értelemszerűen a kalibráltság csökkenése mellett
-- veszteségmentes tömörítés (dekompozíció redundancia szerint, majd redundáns részletek eliminációja), ezzel tárolókapacitás nyerhető számítási kapacitás kárára)
-
-Ezekre alapozva pedig képezhetők az ágensekre specifikusan jellemző optimalizációs technikák, pl.:
-- szemantizálás (a "napló" absztrakciója és materializálása, lehetőve téve a gyorsabb - de kevésbé pontos - inferenciát; egyben szükségessé téve a szemantikus- és epizodikus memória szétválasztását)
-- felejtés (a szemantikus- és epizodikus memória kevéssé releváns részeinek törlése, helyet nyitva az új emlékeknek)
-- a predikció materializálása (azaz a hasznosság tárolása a trajektóriákhoz és az új tapasztalatokból származó, megváltozott hasznosság visszapropagálását az oda vezető múltbeli trajektóriákra; ezáltal lehetővé téve az inferencia során az 1 mélységű, mégis prediktív előretekintést)
-- hierarchikus absztrakció ("Level Of Detail"; lehetővé teszi a modell több szintű absztrahálását, ezáltal az iteratív, de idő hiányában bármikor - egy adott pontosság mellett - leállítható számításokat)
-- modularitás és párhuzamosítás (beleértve a cél dekompozíciót, arbitrálást, szinkronizációt/kommunikációt/állatmegosztást)
-- dinamikus mintavételezés
-
-A technikák felsorolása nem teljes körű.
-
-# Érdekes következmények
-
-A fentiek következményei az alábbi, a jelenleg (legalább részlegesen) elterjedt konszenzussal szembenő állítások validitása:
-- nincsenek "tanult" reflexek, csak a gyakorlás (és a fenti technikák) miatt gyorsabb/nagyobb hosszú/jobb autokorreláció
-- nincs mintakövetés, mint optimalizációs technika; ehelyett minden mintakövetés
-- nincs megerősítéses tanulás, csak tanulás (bár előbbihez közell áll a haszon materializálása és visszapropagálása, ez azonban inkább optimalizációs technika, mint önálló funkció)
-- nincs külön self-modell és környezet-modell, csak világmodell
-- az ágens nem a saját meglepetését minimalizálja, hanem a környezetét maximalizálja; előbbi csak melléktermék; ez feloldja a Dark Room paradoxont is
-
-# Továbfejlesztési  irányok
-
-Fenti ontológia és dedukció - annak érdekében, hogy teljes legyen - kiterjesztendő további optimalizációs technikákkal, az azokra kényszerekkel és alkalmazásuk feltételeivel; valamint az elosztott/hiearchikus ágensek viselkedésére, együttműködésére és kommunikációjára (mentális állapotuk megosztására) vonatkozó kényszerekkel.
-
-Ezt követően levezethető egy ágens (és ágens-hierarchia) "referencia architektúrája", mely már használható tetszőleges ágens (pl. MI, egy vállalat, biológiai, stb.) konstruktív vizsgálatára; ennek az az alapja, hogy az egyszerű túlélésre (vagy a faj túlélésére) optimalizált célfüggvény transzformálható, egy túlélésben jó ágens-architektúra másban is hatékony lesz (az instrumentális konvegencia elismerése mellett természetesen, ez azonban egy kellően hosszú - pl. egy állapotcél eléréséig tartó - trajektóriákhoz hasznot rendelő célfüggvény formájában eleve előáll).
-
-
-
-
-
+Subsequently, a "Reference Architecture" for an agent (and agent hierarchy) can be derived. This can then be used for the constructive examination of any agent (e.g., AI, a corporation, biological entities). Based on the principle of instrumental convergence, an agent architecture optimized for survival will be efficient in achieving other state-goals as well.
