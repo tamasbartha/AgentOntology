@@ -181,7 +181,7 @@ Agents use several techniques to handle limited capacity which are all based on 
 *   There is no "pattern following" as an optimization; rather, everything is pattern following.
 *   There is no reinforcement learning, only learning (utility propagation is an optimization speeding up projection, not a separate function; however materialized utility can theoretically be modified afterwards, which can still qualify as RL).
 *   There is no separate self-model and environment-model, only a **World Model**.
-*   The agent does not minimize its own surprisal; it maximizes the surprisal of the environment. (This resolves the Dark Room Paradox).
+*   The agent does not minimize its own surprisal; it optimizes the surprisal of the environment. (This resolves the Dark Room Paradox).
 
 ## Future Directions
 To be complete, this ontology and deduction must be extended with further optimization techniques, their constraints, and application conditions. Furthermore, it should include constraints regarding the behavior, cooperation, and communication (sharing of mental states) of distributed/hierarchical agents.
