@@ -4,12 +4,13 @@ This document outlines an agent ontology and the subsequent requirements for age
 A key innovation of this ontology and deduction is the inversion of the core postulate of Karl Friston’s Free Energy Principle (FEP). While the FEP suggests that agents act to minimize the surprise (variational free energy) received from their environment [Friston, 2010], this framework proposes the opposite: the primary driver of an agent is the maximization of the surprise exerted upon the environment. In this model, the minimization of internal surprise is merely a necessary byproduct of successful environmental perturbation—a shift that effectively resolves the 'Dark Room' paradox.
 
 ## Introduction
-The original objective was to create a goal-oriented IT project management methodology, the adherence to which—provable even to skeptics—is necessary and sufficient for the realization of an information goal. The rationale for this was that available methodologies are generally functional descriptions that fail to present the underlying constraints; thus, their necessity is difficult to prove.
+The original objective was to create a goal-oriented IT project management methodology, the adherence to which — provable even to skeptics — is necessary and sufficient for the realization of an information goal. The rationale for this was that available methodologies are generally functional descriptions that fail to present the underlying constraints; thus, their effectiveness is difficult to prove.
 
 During the development of the methodology, it soon became clear that any goal-oriented management methodology is essentially suitable for the task, which led directly to the necessity of a (distributed) agent architecture. 
-Currently known agent architectures are also functional descriptions: they model how agents operate but do not provide exhaustive answers to the constraints that make certain functions necessary. This ontology was born to approach the ideal architecture from the perspective of constraints.
+Currently known agent architectures are also functional descriptions: they model - considerably well - how agents operate but do not provide exhaustive answers to the constraints that make certain functions necessary. This ontology was born to approach the ideal architecture from the perspective of constraints.
 
-While the original goal of a complete architecture has not yet been realized, a significant portion of the constraints has been identified and may be of interest to the community.
+While the original goal of a complete architecture has not (yet) been realized, a significant portion of the constraints has been identified and may be of interest to the community.
+
 
 ## Definitions
 
@@ -17,7 +18,7 @@ While the original goal of a complete architecture has not yet been realized, a 
 
 **State Trajectory** – A function mapping time to state; in the discrete case, a temporal sequence of states. It represents the change of state over time and can be interpreted as a starting state plus a sequence of changes/functions.
 
-**Information Rate** – A function that determines how quickly new information is generated at a given point of a state trajectory. It is the differential of the Shannon entropy of the trajectory segment defined up to that point.
+**Information Rate** – A function that determines how quickly new information is generated at a given point of a state trajectory; i.e., to what extent the state change deviates from previously observed patterns. It is the differential of the Shannon entropy of the trajectory segment defined up to that point.
 
 **Local Regularity** – The differentiability order of the information rate at a given point in time. If the information rate is singular (discontinuous), the local regularity is 0. If it is smooth (no derivative is discontinuous), it is infinite.
 
@@ -104,37 +105,62 @@ An existing agent cannot maintain the surprisal of its environment indefinitely.
 ### Absolute Constraints on a Surviving Agent
 
 **The Constraint of Agency**
-The existence of the agent's boundary surface and the feedback loop are equivalent. The maintenance of the feedback loop—and thus the agent—requires continuous mutual surprisal. Since the environment (having infinite state space) will statistically always surprise the agent, the agent's survival depends primarily on its own Agency: maintaining bandwidth $>0$ and the ability to surprise the environment.
+The existence of the agent's boundary surface and the feedback loop are equivalent (a non-existent feedback loop has no cut, while an existing one always has a cut corresponding to the agent definition).
+
+The maintenance of the feedback loop — and thus the agent — requires continuous mutual surprisal (since no surprise means no information, thus no information flow).
+
+Since the environment (having infinite state space) will statistically always surprise the agent, the agent's survival depends primarily on its own Agency: maintaining bandwidth $>0$ and the ability to surprise the environment.
 
 **The Constraint of a Grounded World Model**
 An agent can systematically surprise its environment if:
-1.  It is consistently lucky (statistically improbable over time).
-2.  The agent possesses a **World Model** (its state correlates with the input and output trajectories).
+1.  It is consistently lucky (statistically improbable over time, measured in life experience).
+2.  The agent possesses a **World Model** (its state correlates with the input and output trajectories), so that it would "know" what would **not** surprise the environment.
 
 The expected lifespan of an agent correlates positively with the groundedness of its world model. A minimum level of groundedness is a necessary condition for the emergence of an agent.
+
+**Decrease of Surprise received from the Environment as a Side Effect**
+The surprise of the input naturally decreases with the groundedness of the world model, but this is merely a side effect; the agent does not survive because it reduces its own surprise, but because it increases the surprise of its output. The latter brings the former with it, as the environment increasingly moves along the path forced upon it by the agent.
 
 **The Necessity of Decision**
 If multiple outputs are possible within bandwidth and agency constraints, the agent must decide.
 
 **The Constraint of Goal-Orientedness**
-Decision-making is deterministic based on the world model and inputs. From an external observer's perspective, a deterministic utility can be assigned to possible outputs. Thus, a goal function can be derived that assigns utility to trajectory segments.
+Decision-making is deterministic based on the world model and inputs, thus, from an external observer's perspective/ex-post, a deterministic utility can be assigned to possible outputs (even if only a binary one, eg. 1 for being chosen, 0 for not). Thus, a goal function can be derived that assigns utility to trajectory segments.
 
-### The Inference of the World Model as a Decision Function
-Decision-making can be decomposed into enumerating possible outputs, calculating utility, and selecting the maximum. The world model itself contains this information; its inference is based on the autocorrelation of past trajectory segments with the current trajectory.
+**The Inference of the World Model as a Decision Function**
+Decision-making can be logically decomposed into enumerating possible outputs, calculating utility, and selecting the output with maximum utility.
 
-### Constraint to Maintain and Develop Physical Structure
-The agent must possess a physical structure (bandwidth) that allows for observation and agency while protecting against physical impacts. This creates a trade-off between sensitivity (high bandwidth) and protection (low bandwidth).
+The world model itself however contains all information required to do both; inferencing it simply selects the proper output.
+
+Its inference is based on the autocorrelation of past trajectory segments with the current trajectory, and projecting forward on that past trajectory found, eventually finding a survivable/long enough path, also - indirectly - selecting the output required/chosen (the direct continuation of the past trajectory).
+
+**Constraint to Maintain and Develop Physical Structure**
+The agent must possess a physical structure (bandwidth) that allows for observation and agency while protecting against physical impacts. This creates a trade-off between sensitivity+actionability (high bandwidth) and protection (low bandwidth), which can be optimized with interface partitioning.
 
 ## Constraints on Agents Surviving High Mental Amortization Rates
 
 **The Constraint of Learning**
-The world model is never perfectly grounded due to the finite state space of the agent versus the infinite environment. Calibration is maintained through learning (expanding the world model trajectories).
+The world model is never perfectly grounded due to the finite state space of the agent versus the infinite environment; also the (value of the) world model naturally amortizes if the environment or the agent's operation shifts into a phase for which the model is not calibrated; the speed of amortization is proportional to the mental load.
+
+Calibration is maintained through learning (expanding the world model - input and output - trajectories).
 
 **Logging as Learning**
-For the world model to change, state changes must be permanent and ordered (log-like). Thus, sensing and acting automatically constitute learning.
+For the world model to change, state changes naturally happening within the agent while sensing and acting (or at least a replica of them) must be permanent and ordered (log-like). This way, sensing and acting automatically - and actually - constitute learning.
+
+**Reciprocal of Momentary Cognitive Load as a Non-Binary Objective Function for Learning**
+The problem with a binary goal function is that in case of inaccuracies in the World Model — exactly where learning is most relevant — the agent would only "learn" from its own death.
+
+Instead, the agent must apply a continuous goal function that is proportional to its expected remaining lifespan (measured not in temporal terms, but in the domain of cognitive sacrifice); a trivial choice for this is the reciprocal of momentary cognitive load.
 
 **Proactivity**
-With a continuous goal function and learning, reactive behavior becomes true proactivity. Long-term utility can be calculated by projecting the current trajectory segment.
+While World model-based inference is natively suited for predictions (by following forward the autocorrelated past segment), in the absence of learning, this appears for the external observer as a hard-wired decision or reactive behavior.
+
+With a continuous goal function and learning however, model-based inference becomes true proactivity. Additionally, with reciprocal of momentary cognitive load as the goal function, long-term utility can be "cheaply" calculated on a trajectory.
+
+**Simulation/Exploration**
+The inference, necessarily based on a recursive, internal feedback loop (due to autocorrelation) can be supplemented with further recursive inference extending the already extended trajectory segment with further "pieces" — i.e., long-term simulation. The damping of the internal feedback loop's excitation — ensuring the convergence of the simulation — can be provided eg. by temporal discounting (standard or based on life experience); however, none of this is a necessary condition for proactivity.
+
+Such a simulation - driven by the abscense of long correlating past trajectory segments - provides predictions made up of small "bits" of the past, which is naturally ungrounded as a whole; decisions based on such predictions may appear as exploration to an external observer, and is a fundamental tool for recalibrating the world model after experiencing severe cognitivr load. 
 
 **Separation of Mental and Physical State**
 High mental amortization requires fast learning (high information density/rapid state change), while physical protection requires the opposite. This necessitates the separation of mental and physical states, forming a **"Figure-8" feedback loop**:
@@ -142,11 +168,10 @@ High mental amortization requires fast learning (high information density/rapid 
 2.  An **Internal Loop (Cognitive)** between the physical state and the mental state.
 
 ## Optimization and Heuristics
-Agents use several techniques to handle limited capacity:
-*   **Decomposition, Prioritization, Elimination, Materialization.**
-*   **Abstraction (Lossy compression):** Sacrificing calibration for capacity.
+Agents use several techniques to handle limited capacity which are all based on **Decomposition, Prioritization, Elimination and Materialization.**, eg.:
+*   **Abstraction (Lossy compression):** Sacrificing calibration for capacity and processing speed
 *   **Semantization:** Abstracting the "log" into semantic memory for faster inference; this necessitates the separation of semantic and episodic memory.
-*   **Forgetting:** Deleting less relevant parts of memory.
+*   **Forgetting:** Deleting less relevant parts of memory, making space for new information
 *   **Materialization of Predictions:** Storing utility values within trajectories to allow 1-step predictive lookahead.
 *   **Hierarchical Abstraction (Level Of Detail):** Allowing iterative computation that can be halted at any point based on time constraints.
 *   **Modularity and Parallelization:** Including goal decomposition, arbitration, and synchronization.
@@ -154,16 +179,15 @@ Agents use several techniques to handle limited capacity:
 ## Interesting Consequences
 *   There are no "learned reflexes," only faster autocorrelation due to optimization.
 *   There is no "pattern following" as an optimization; rather, everything is pattern following.
-*   There is no reinforcement learning, only learning (utility propagation is an optimization, not a separate function).
+*   There is no reinforcement learning, only learning (utility propagation is an optimization speeding up projection, not a separate function).
 *   There is no separate self-model and environment-model, only a **World Model**.
 *   The agent does not minimize its own surprisal; it maximizes the surprisal of the environment. (This resolves the Dark Room Paradox).
 
 ## Future Directions
 To be complete, this ontology and deduction must be extended with further optimization techniques, their constraints, and application conditions. Furthermore, it should include constraints regarding the behavior, cooperation, and communication (sharing of mental states) of distributed/hierarchical agents.
 
-Subsequently, a "Reference Architecture" for an agent (and agent hierarchy) can be derived. This can then be used for the constructive examination of any agent (e.g., AI, a corporation, biological entities). Based on the principle of instrumental convergence, an agent architecture optimized for survival will be efficient in achieving other state-goals as well.
+Subsequently, a "Reference Architecture" for an agent (and agent hierarchy) can be derived. This can then be used for the constructive examination of any agent (e.g., AI, a corporation, biological entities). The basis for this is that an objective function optimized for individual survival (or the survival of a species) can be transformed; an agent architecture good at survival will be efficient in other tasks as well (acknowledging the necessity of survival as well - ie. instrumental convergence, which naturally arises in the form of an objective function assigning utility to trajectories long enough to reach a state goal).
 
 ## References
-
 Friston, K. (2010). The free-energy principle: a unified brain theory? Nature Reviews Neuroscience, 11(2), 127-138. doi.org
 Friston, K., Thornton, C., & Clark, A. (2012). Free-energy minimization and the dark-room problem. Frontiers in Psychology, 3, 130. doi.org
