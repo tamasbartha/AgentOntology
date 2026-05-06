@@ -179,7 +179,7 @@ Agents use several techniques to handle limited capacity which are all based on 
 ## Interesting Consequences
 *   There are no "learned reflexes," only faster autocorrelation due to optimization.
 *   There is no "pattern following" as an optimization; rather, everything is pattern following.
-*   There is no reinforcement learning, only learning (utility propagation is an optimization speeding up projection, not a separate function).
+*   There is no reinforcement learning, only learning (utility propagation is an optimization speeding up projection, not a separate function; however materialized utility can theoretically be modified afterwards, which can still qualify as RL).
 *   There is no separate self-model and environment-model, only a **World Model**.
 *   The agent does not minimize its own surprisal; it maximizes the surprisal of the environment. (This resolves the Dark Room Paradox).
 
