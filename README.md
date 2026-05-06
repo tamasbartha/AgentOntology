@@ -1,7 +1,7 @@
 # Agent Ontology: A Constraint-Based Approach
 This document outlines an agent ontology and the subsequent requirements for agents efficient in survival.
 
-A key innovation of this ontology and deduction is the inversion of the core postulate of Karl Friston’s Free Energy Principle (FEP). While the FEP suggests that agents act to minimize the surprise (variational free energy) received from their environment [Friston, 2010], this framework proposes the opposite: the primary driver of an agent is the optimization of the surprise exerted upon the environment. In this model, the minimization of internal surprise is merely a necessary byproduct of successful environmental perturbation—a shift that effectively resolves the 'Dark Room' paradox.
+A key innovation of this ontology and deduction is the inversion of the core postulate of Karl Friston’s Free Energy Principle (FEP). While the FEP suggests that agents act to minimize the surprise (variational free energy) received from their environment [Friston, 2010], this framework proposes the opposite: the primary driver of an agent is the optimization (but not necessarily maximization) of the surprise exerted upon the environment. In this model, the minimization of internal surprise is merely a necessary byproduct of successful environmental perturbation—a shift that effectively resolves the 'Dark Room' paradox.
 
 ## Introduction
 The original objective was to create a goal-oriented IT project management methodology, the adherence to which — provable even to skeptics — is necessary and sufficient for the realization of an information goal. The rationale for this was that available methodologies are generally functional descriptions that fail to present the underlying constraints; thus, their effectiveness is difficult to prove.
@@ -181,7 +181,7 @@ Agents use several techniques to handle limited capacity which are all based on 
 *   There is no "pattern following" as an optimization; rather, everything is pattern following.
 *   There is no reinforcement learning, only learning (utility propagation is an optimization speeding up projection, not a separate function; however materialized utility can theoretically be modified afterwards, which can still qualify as RL).
 *   There is no separate self-model and environment-model, only a **World Model**.
-*   The agent does not minimize its own surprisal; it optimizes the surprisal of the environment. (This resolves the Dark Room Paradox).
+*   The agent does not minimize its own surprisal; it optimizes (but not necessarily maximizes) the surprisal of the environment. (This resolves the Dark Room Paradox).
 
 ## Future Directions
 To be complete, this ontology and deduction must be extended with further optimization techniques, their constraints, and application conditions. Furthermore, it should include constraints regarding the behavior, cooperation, and communication (sharing of mental states) of distributed/hierarchical agents.
