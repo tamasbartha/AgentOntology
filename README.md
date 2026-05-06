@@ -3,8 +3,6 @@ This document outlines an agent ontology and the subsequent requirements for age
 
 **UPDATE 2026.05.06 08:16 CET**: ChatGPT found a new falsifyable statement based on the ontology, and was kind enough to create a paper and a Python test suite to validate it. I don't understand much of it (yet), so I uploaded it AS-IS as neurips_gamma_project.zip. **The statement**: Complex adaptive systems undergo a measurable phase transition from stable subsystem structure to dynamically generated subsystem structure when the rate of interaction reconfiguration exceeds the rate at which stable partitions can form—that is, when Γ = flow reconfiguration rate / structural stabilization rate approaches 1.
 
-Statement follows. 
-
 A key innovation of this ontology and deduction is the inversion of the core postulate of Karl Friston’s Free Energy Principle (FEP). While the FEP suggests that agents act to minimize the surprise (variational free energy) received from their environment [Friston, 2010], this framework proposes the opposite: the primary driver of an agent is the optimization (but not necessarily maximization) of the surprise exerted upon the environment. In this model, the minimization of internal surprise is merely a necessary byproduct of successful environmental perturbation—a shift that effectively resolves the 'Dark Room' paradox.
 
 ## Introduction
