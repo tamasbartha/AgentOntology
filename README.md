@@ -1,4 +1,4 @@
-# The Thermodynamics of Agency
+# (A 'wannabe')Thermodynamics of Agency
 
 *A constraint-grounded, empirically validatable theory of agents*
 
