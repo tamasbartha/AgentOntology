@@ -1,7 +1,7 @@
 # Agency Requires Mutual Surprisal: The Optimization Gap in Compression-Based Frameworks
 
-Author: Tamas Arpad Bartha
-Independent researcher
+Author: Tamas Arpad Bartha,
+Independent researcher,
 Budapest, Hungary
 
 Contact: [[LinkedIn URL](https://www.linkedin.com/in/tamas-bartha-9b33aaa9)]
