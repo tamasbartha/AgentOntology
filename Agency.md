@@ -1,8 +1,12 @@
 # Agency Requires Mutual Surprisal: The Optimization Gap in Compression-Based Frameworks
 
-Author: Tamas Arpad Bartha, Independent researcher, Budapest, Hungary
+Author: Tamas Arpad Bartha
+Independent researcher
+Budapest, Hungary
+
 Contact: [[LinkedIn URL](https://www.linkedin.com/in/tamas-bartha-9b33aaa9)]
 Repository: [https://github.com/tamasbartha/AgentOntology]
+
 Version of [2026.05.09], working draft
 Earliest articulation of the agent definition: see archive in repository
 
