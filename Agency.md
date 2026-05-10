@@ -4,7 +4,7 @@ Author: Tamas Arpad Bartha,
 Independent researcher,
 Budapest, Hungary
 
-Contact: [[LinkedIn URL](https://www.linkedin.com/in/tamas-bartha-9b33aaa9)]
+Contact: [https://www.linkedin.com/in/tamas-bartha-9b33aaa9]
 Repository: [https://github.com/tamasbartha/AgentOntology]
 
 Version of 2026.05.09, working draft,
