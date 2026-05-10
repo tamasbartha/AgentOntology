@@ -50,11 +50,7 @@ This work is released under the [Creative Commons Attribution 4.0 International 
 
 ## Citation
 
-While an arXiv preprint is in preparation, the repository can be cited as:
-
-[Tamas Arpad Bartha]. *Agency, the optimization gap, and the architectural gap.* GitHub repository, [2026]. Available at: [https://github.com/tamasbartha/AgentOntology].
-
-When the arXiv preprint is posted, that will become the canonical citation and this README will be updated to reflect it.
+Bartha, T. Á. (2026). Agency Requires Mutual Surprisal: The Optimization Gap in Compression-Based Frameworks. Zenodo. https://doi.org/10.5281/zenodo.20108166
 
 ## Contact
 
